@@ -1,29 +1,38 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app uk-offcanvas-content">
+    <div id="offcanvas-nav" ref="offcanvasMenu" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+            <h1>{{ $store.getters.appName }}</h1>
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-active"><a href="#">Active</a></li>
+                <li class="uk-parent">
+                    <a href="#">Parent</a>
+                    <ul class="uk-nav-sub">
+                        <li><a href="#">Sub item</a></li>
+                        <li><a href="#">Sub item</a></li>
+                    </ul>
+                </li>
+                <li class="uk-nav-header">Header</li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+                <li class="uk-nav-divider"></li>
+                <li><a @click="logout()"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Logout</a></li>
+            </ul>
+
+        </div>
     </div>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { AUTH_LOGOUT } from "@/store/actions/auth";
+export default {
+  methods: {
+    logout() {
+      window.UIkit.offcanvas(this.$refs.offcanvasMenu).hide();
+      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
     }
   }
-}
-</style>
+};
+</script>
