@@ -2,7 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 import store from "../store";
 import Login from "@/views/auth/login";
-import Register from "@/views/auth/register";
 import App from "@/views/layouts/App";
 import Home from "@/views/home";
 
@@ -45,12 +44,6 @@ export default new Router({
       path: "/login",
       name: "login",
       component: Login,
-      beforeEnter: ifNotAuthenticated
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: Register,
       beforeEnter: ifNotAuthenticated
     }
   ]
