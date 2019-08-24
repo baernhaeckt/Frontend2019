@@ -6,6 +6,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueSnackbar from "vue-snack";
+import './newsfeed'
 
 // loads the Icon plugin
 window._ = require("lodash");
