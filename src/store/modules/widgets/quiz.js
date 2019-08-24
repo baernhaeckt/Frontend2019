@@ -59,10 +59,10 @@ const mutations = {
     },
     [QUIZ_ANSWER_QUESTION]: (state, resp) => {
         state.answer = {
-            answered = true,
-            points = resp.awardedPoints,
-            detailedAnswer = resp.detailedAnswer,
-            isCorrectAnswer = resp.isCorrectAnswer
+            answered: true,
+            points: resp.awardedPoints,
+            detailedAnswer: resp.detailedAnswer,
+            isCorrectAnswer: resp.isCorrectAnswer
         }
     } 
   };

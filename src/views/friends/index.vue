@@ -11,7 +11,7 @@
         <div v-else class="no-friends">
           <font-awesome-icon :icon="['far', 'frown-open']" class="sad-user" />
           <div class="no-friends-text">
-            Du hast leider noch keine Freunde auf [LOGO]. Füge doch jetzt jemand hinzu!
+            Du hast leider noch keine Freunde auf <img src="/assets/logo.svg" width="70" class="leaf-logo" />. Füge doch jetzt jemand hinzu!
           </div>
         </div>
       </template>
@@ -108,6 +108,14 @@ export default {
 
       .no-friends-text {
         margin-top: 20px;
+
+        .leaf-logo {
+          width: 60px;
+          height: 18px;
+          object-fit: cover;
+          object-position: left;
+          margin-top: -4px;
+        }
       }
     }
 
