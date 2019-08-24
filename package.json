@@ -16,6 +16,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.10.2",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "@google/maps": "^0.5.5",
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.28",
     "ev-emitter": "^1.1.1",
