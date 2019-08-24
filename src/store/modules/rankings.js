@@ -3,7 +3,7 @@ import {
     RANKINGS_LIST_GLOBAL,
     RANKINGS_LIST_FRIENDS,
     RANKINGS_LIST_LOCAL
-  } from "@/store/actions/friends";
+  } from "@/store/actions/rankings";
 import { apiCall, api_routes } from "@/utils/api";
 
 const state = {

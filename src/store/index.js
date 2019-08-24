@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import auth from "./modules/auth";
 import user from "./modules/user";
 import friends from "./modules/friends";
-import friends from "./modules/rankings";
+import rankings from "./modules/rankings";
 import settings from "./modules/settings";
 Vue.use(Vuex);
 
