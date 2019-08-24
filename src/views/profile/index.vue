@@ -3,10 +3,10 @@
     <h1>Vervollständige jetzt Dein Profil</h1>
     <b-form @submit.prevent="updateProfile">
       <b-form-group label="E-Mail Adresse">
-        <b-input id="email" v-model="updatedProfile.email" placeholder="E-Mail" readonly />
+        <b-input id="email" name="email" v-model="updatedProfile.email" placeholder="E-Mail" readonly />
       </b-form-group>
       <b-form-group label="Nickname (sichtbar für alle Benutzer)">
-        <b-input id="displayname" v-model="updatedProfile.displayName" placeholder="Nickname" />
+        <b-input id="displayname" name="nickname" v-model="updatedProfile.displayName" placeholder="Nickname" />
       </b-form-group>
 
       <b-button type="submit" variant="success">Profil aktualisieren</b-button>

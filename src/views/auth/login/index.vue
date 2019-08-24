@@ -9,7 +9,7 @@
             <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
             <b-form @submit.prevent="checkEmail">
               <b-input-group>
-                <b-form-input id="email" v-model="email" type="email" required placeholder="E-Mail" />
+                <b-form-input id="email" name="email" v-model="email" type="email" required placeholder="E-Mail" />
                 <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
                   <b-spinner small v-if="isLoading" />
                   Weiter
@@ -23,7 +23,7 @@
             <p>Bitte bestätige Deinen Account mit Deinem persönlichen Passwort.</p>
             <b-form @submit.prevent="login">
               <b-input-group>
-                <b-form-input id="password" v-model="password" type="password" required placeholder="Passwort" />
+                <b-form-input id="password" name="password" v-model="password" type="password" required placeholder="Passwort" />
                 <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
                   <b-spinner small v-if="isLoading" />
                   Einloggen
