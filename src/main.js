@@ -1,4 +1,4 @@
-import './newsfeed'
+import newsfeed from './newsfeed'
 import '@babel/polyfill'
 import 'mutationobserver-shim'
 import Vue from "vue";
@@ -18,6 +18,7 @@ Vue.config.devtools = true
 
 Vue.use(VueSnackbar, {});
 
+window.newsfeed = newsfeed
 window.vueInstance = new Vue({
   router,
   store,

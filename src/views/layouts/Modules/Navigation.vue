@@ -11,11 +11,13 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right href="#">
-          <template slot="button-content">{{ userNameOrEmail }}</template>
+        <b-dropdown right href="#" variant="success">
+          <template slot="button-content">
+            {{ userNameOrEmail }}
+          </template>
           <b-dropdown-item to="profile">Dein Profil</b-dropdown-item>
           <b-dropdown-item @click="logout" href="#">Logout</b-dropdown-item>
-        </b-nav-item-dropdown>
+        </b-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

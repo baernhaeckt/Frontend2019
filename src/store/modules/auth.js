@@ -20,7 +20,8 @@ const state = {
 
 const getters = {
   isAuthenticated: state => !!state.token,
-  authStatus: state => state.status
+  authStatus: state => state.status,
+  accessToken: state => state.token
 };
 
 const actions = {
