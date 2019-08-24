@@ -4,6 +4,7 @@ import auth from "./modules/auth";
 import user from "./modules/user";
 import friends from "./modules/friends";
 import rankings from "./modules/rankings";
+import awards from "./modules/awards";
 import settings from "./modules/settings";
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     user,
     friends,
     rankings,
+    awards,
     settings
   },
   strict: debug

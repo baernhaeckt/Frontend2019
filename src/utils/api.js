@@ -25,10 +25,20 @@ export const api_routes = {
   },
   tokens: {
     claim: API_SERVER + "api/tokens"
+  },
+  awards: {
+    list_awards: "api/awards"
   }
 };
 
-export const apiCall = ({ url, method, ...args }) =>
+const urlReplace = (url, urlData) => {
+  for (let prop in urlData) {
+    url = url.replace(`{${prop}}`, urlData[prop])
+  }
+  return url
+}
+
+export const apiCall = ({ url, method, urlData, ...args }) =>
   new Promise((resolve, reject) => {
     let token = localStorage.getItem("user-token") || "";
 
@@ -36,6 +46,10 @@ export const apiCall = ({ url, method, ...args }) =>
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
     try {
+      if (urlData) {
+        url = urlReplace(url, urlData);
+      }
+
       axios({
         method: method || "get",
         url: url,
