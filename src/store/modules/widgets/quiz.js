@@ -51,9 +51,8 @@ const actions = {
 
 const mutations = {
     [QUIZ_GET_QUESTION]: (state, resp) => {
-      console.log(resp)
-    if (false) {
-        state.question = {
+      if (resp == null || resp == "") {
+        state.question = { 
             noMoreQuestions: true
         }
       } else {
