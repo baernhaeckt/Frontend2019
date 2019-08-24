@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import BlockBox from './BlockBox'
-
 export default {
   name: "UserBadges",
   mounted() {
@@ -25,7 +23,6 @@ export default {
   methods: {
   },
   components: {
-    BlockBox
   }
 };
 </script>

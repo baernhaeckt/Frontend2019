@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h1></h1>
+    <google-map />
   </div>
 </template>
 
 <script>
+import GoogleMap from './../../components/GoogleMap'
+
 export default {
-  name: "Home"
+  name: "Home",
+  components: {
+    GoogleMap
+  }
 };
 </script>

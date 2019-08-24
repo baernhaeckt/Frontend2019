@@ -8,6 +8,8 @@ import router from "./router";
 import store from "./store";
 import VueSnackbar from "vue-snack";
 
+import BlockBox from './components/BlockBox'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -19,6 +21,7 @@ library.add(fab)
 library.add(far)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('block-box', BlockBox)
 
 // loads the Icon plugin
 window._ = require("lodash");

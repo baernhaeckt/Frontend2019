@@ -3,7 +3,7 @@
     <navbar />
     <b-container fluid class="main">
       <b-row>
-        <b-col cols="3">
+        <b-col md="3">
           <ranking />
           <user-badges />
         </b-col>

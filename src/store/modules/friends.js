@@ -29,7 +29,7 @@ const actions = {
     [FRIENDS_ADD]: ({commit, dispatch}, email ) => {
         return new Promise((resolve, reject) => {
             let axioParams = new URLSearchParams()
-            axioParams.append('email', email)
+            axioParams.append('friendEmail', email)
   
             apiCall({ url: api_routes.friends.add, params: axioParams, method: "post" })
             .then(resp => { 
@@ -41,7 +41,7 @@ const actions = {
     [FRIENDS_REMOVE]: ({commit, dispatch}, email) => {
         return new Promise((resolve, reject) => {
             let axioParams = new URLSearchParams()
-            axioParams.append('email', email)
+            axioParams.append('friendEmail', email)
 
             apiCall({ url: api_routes.friends.remove, params: axioParams, method: "delete" })
             .then(resp => { 

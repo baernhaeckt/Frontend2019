@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { USER_REQUEST, USER_UPDATE } from "@/store/actions/user.js";
+import { USER_REQUEST, USER_UPDATE } from "@/store/actions/user";
 import { mapGetters } from 'vuex';
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="sm" type="dark" variant="success">
+  <b-navbar toggleable="sm" type="dark" variant="success" class="text-white">
     <b-navbar-brand to="/">
       <div class="logo"></div>
     </b-navbar-brand>
@@ -11,6 +11,7 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
+        <b-button to="/friends" class="mr-2"><font-awesome-icon icon="users" class="mr-2" /> Freunde</b-button>
         <b-dropdown right href="#" variant="success">
           <template slot="button-content">
             <font-awesome-icon icon="user" class="mr-2" /> {{ userNameOrEmail }}
@@ -62,7 +63,7 @@ export default {
       background-size: contain;
       background-repeat: no-repeat;
       min-height: 55px;
-      min-width: 353px;
+      min-width: 215px;
 
       @include media-breakpoint-down(sm) {
         min-width: 250px;

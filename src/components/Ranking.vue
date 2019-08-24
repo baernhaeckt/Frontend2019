@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import BlockBox from './BlockBox'
-
 export default {
   name: "Ranking",
   mounted() {
@@ -27,7 +25,6 @@ export default {
   methods: {
   },
   components: {
-    BlockBox
   }
 };
 </script>

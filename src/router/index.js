@@ -6,6 +6,7 @@ import App from "@/views/layouts/App";
 import Home from "@/views/home";
 import Profile from "@/views/profile";
 import Token from "@/views/token";
+import Friends from "@/views/friends";
 
 Vue.use(Router);
 
@@ -51,6 +52,12 @@ export default new Router({
           name: "profile",
           beforeEnter: ifAuthenticated,
           component: Profile
+        },
+        {
+          path: "/friends",
+          name: "friends",
+          beforeEnter: ifAuthenticated,
+          component: Friends
         }
       ]
     },
