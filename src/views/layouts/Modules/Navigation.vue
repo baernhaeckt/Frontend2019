@@ -13,10 +13,10 @@
       <b-navbar-nav class="ml-auto">
         <b-dropdown right href="#" variant="success">
           <template slot="button-content">
-            {{ userNameOrEmail }}
+            <font-awesome-icon icon="user" class="mr-2" /> {{ userNameOrEmail }}
           </template>
-          <b-dropdown-item to="profile">Dein Profil</b-dropdown-item>
-          <b-dropdown-item @click="logout" href="#">Logout</b-dropdown-item>
+          <b-dropdown-item to="profile"><font-awesome-icon icon="user-edit" class="mr-2" />Dein Profil</b-dropdown-item>
+          <b-dropdown-item @click="logout" href="#"><font-awesome-icon icon="sign-out-alt" class="mr-2" />Logout</b-dropdown-item>
         </b-dropdown>
       </b-navbar-nav>
     </b-collapse>

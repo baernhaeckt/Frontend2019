@@ -29,3 +29,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .color-green { color: $success; }
+  .color-gold { color: gold; }
+  .color-silver { color: silver; }
+  .color-bronze { color: #cd7f32; }
+
+</style>
