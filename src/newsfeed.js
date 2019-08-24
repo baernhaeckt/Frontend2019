@@ -1,8 +1,13 @@
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
- 
+
 const connection = new HubConnectionBuilder()
-  .withUrl('http://localhost:5000/newsfeed')
+  .withUrl("https://baernhaeckt.azurewebsites.net/" + 'newsfeed')
   .configureLogging(LogLevel.Information)
   .build()
+
+  connection.on('newEvent', (event) => {
+    // TODO: Implement the newsfeed.
+    console.log("Event: " + event)
+  });
  
 connection.start()
