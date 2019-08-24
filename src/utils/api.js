@@ -31,7 +31,7 @@ export const api_routes = {
   },
   sufficient_types: {
     list_baseline: "api/sufficienttype/baseline",
-    list_personal: "api/sufficienttype/personal"
+    list_personal: "api/sufficienttype/user"
   },
   widgets: {
     quiz: {

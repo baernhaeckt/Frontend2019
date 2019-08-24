@@ -6,23 +6,23 @@ import {
   import { apiCall, api_routes } from "@/utils/api";
 
 const state = {
-    questionId: "",
-    question: "",
-    answers: [],
 
-    points: 0,
-    answered: false,
-    correct_answer: false,
-    detailed_answer: ""
+    question: {
+        questionId: "",
+        question: "",
+        answers: []
+    },
+
+    answer: {
+        points: 0,
+        answered: false,
+        isCorrectAnswer: false,
+        detailedAnswer: ""
+    }
 }
 const getters = {
-    question: state => state.question,
-    answers: state => state.answers,
-    points: state => state.points,
-
-    answered: state => state.answered,
-    isCorrectAnswer: state => state.correct_answer,
-    detailedAnswer: state => state.detailed_answer 
+    getQuestion: state => state.question,
+    getAnswer: state => state.answer 
 }
 
 const actions = {
@@ -50,17 +50,20 @@ const actions = {
 
 const mutations = {
     [QUIZ_GET_QUESTION]: (state, resp) => {
-      state.points = 0;
-      state.answered = false;
-      state.questionId = resp.id;
-      state.question = resp.question;
-      state.answers = resp.answers;
+      state.answer.answered = false;
+      state.question = {
+        questionId: resp.id,
+        question: resp.question,
+        answers: resp.answers
+      }
     },
     [QUIZ_ANSWER_QUESTION]: (state, resp) => {
-        state.points = resp.awardedPoints;
-        state.correct_answer = resp.isCorrect;
-        state.detailedAnswer = resp.DetailedAnswer;
-        state.answered = true;      
+        state.answer = {
+            answered = true,
+            points = resp.awardedPoints,
+            detailedAnswer = resp.detailedAnswer,
+            isCorrectAnswer = resp.isCorrectAnswer
+        }
     } 
   };
 
