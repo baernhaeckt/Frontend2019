@@ -23,7 +23,13 @@ const state = {
             lastRefresh: new Date(),
             inited: false
         }
-    }
+    },
+    summary: {
+        local: 0,
+        global: 0,
+        friends: 0
+    },
+    summaryInited: false
 }
 const getters = {
     global: state => state.rankings.global.users,
@@ -35,6 +41,8 @@ const getters = {
     friends: state => state.rankings.friends.users,
     isFriendsInited: state => state.rankings.friends.inited,
     lastRefreshFriends: state => state.rankings.friends.lastRefresh,
+    getSummary: state => state.summary,
+    isSummaryInited: state => state.summaryInited
 }
 
 const actions = {
@@ -56,6 +64,16 @@ const actions = {
                 })
                 .catch(err => { reject(err); });
         })
+    },
+    [RANKINGS_SUMMARY]: () => {
+        return new Promise((resolve, reject) => {
+            apiCall({ url: api_routes.rankings.summary, method: "get"})
+                .then(resp => {
+                    commit(RANKINGS_SUMMARY, resp)
+                    resolve(resp); 
+                })
+                .catch(err => { reject(err); });
+        })
     }
 }
 
@@ -64,6 +82,14 @@ const mutations = {
       state.rankings[identifier].users = resp;
       state.rankings[identifier].lastRefresh = new Date();
       state.rankings[identifier].inited = true
+    },
+    [RANKINGS_SUMMARY]: (state, resp) => {
+        state.summary = {
+            local: resp.localRank,
+            global: resp.globalRank,
+            friends: resp.friendRank
+        }
+        state.summaryInited = true
     }
   };
 
