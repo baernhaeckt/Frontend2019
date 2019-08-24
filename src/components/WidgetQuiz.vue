@@ -58,7 +58,7 @@ export default {
       return !this.isLoading && this.initialized
     },
     answers () {
-      return !this.getQuestion.noMoreQuestions ? this.getQuestion.answers.map(answer => {
+      return this.getQuestion.answers != null ? this.getQuestion.answers.map(answer => {
         return {
           text: answer,
           value: answer
@@ -91,7 +91,6 @@ export default {
           this.answerChecked = true
         })
         .catch((err) => {
-          console.log(err)
           this.isAnswerCheckLoading = false
           this.answerCheckError = true
         })
