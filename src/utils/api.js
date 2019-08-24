@@ -18,7 +18,7 @@ export const api_routes = {
   points: {
     list: API_SERVER + "api/users/{userId}/points",
   },
-  ranking: {
+  rankings: {
     list_global: API_SERVER + "api/rankings/global",
     list_global: API_SERVER + "api/rankings/local",
     list_global: API_SERVER + "api/rankings/friends"
