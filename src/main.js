@@ -1,3 +1,4 @@
+import './newsfeed'
 import '@babel/polyfill'
 import 'mutationobserver-shim'
 import Vue from "vue";
@@ -6,7 +7,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueSnackbar from "vue-snack";
-import './newsfeed'
 
 // loads the Icon plugin
 window._ = require("lodash");
@@ -18,7 +18,7 @@ Vue.config.devtools = true
 
 Vue.use(VueSnackbar, {});
 
-new Vue({
+window.vueInstance = new Vue({
   router,
   store,
   render: h => h(App)
