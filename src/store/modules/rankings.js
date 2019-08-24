@@ -49,7 +49,7 @@ const actions = {
     },
     "RANKINGS_LIST_GENERIC": ({commit, dispatch}, identifier) => {        
         return new Promise((resolve, reject) => {
-            apiCall({ url: api_routes.rankings[identifier], method: "get"})
+            apiCall({ url: api_routes.rankings["list_" + identifier], method: "get"})
                 .then(resp => {
                     commit("RANKINGS_LIST_GENERIC", identifier, resp)
                     resolve(resp); 

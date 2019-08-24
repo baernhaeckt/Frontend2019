@@ -20,8 +20,8 @@ export const api_routes = {
   },
   rankings: {
     list_global: API_SERVER + "api/rankings/global",
-    list_global: API_SERVER + "api/rankings/local",
-    list_global: API_SERVER + "api/rankings/friends"
+    list_local: API_SERVER + "api/rankings/local",
+    list_friends: API_SERVER + "api/rankings/friends"
   },
   tokens: {
     claim: API_SERVER + "api/tokens"
