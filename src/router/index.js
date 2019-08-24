@@ -4,6 +4,7 @@ import store from "../store";
 import Login from "@/views/auth/login";
 import App from "@/views/layouts/App";
 import Home from "@/views/home";
+import History from "@/views/history";
 import Profile from "@/views/profile";
 import Token from "@/views/token";
 import Friends from "@/views/friends";
@@ -58,6 +59,12 @@ export default new Router({
           name: "friends",
           beforeEnter: ifAuthenticated,
           component: Friends
+        },
+        {
+          path: "/history",
+          name: "history",
+          beforeEnter: ifAuthenticated,
+          component: History
         }
       ]
     },
