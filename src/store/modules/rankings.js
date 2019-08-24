@@ -66,7 +66,7 @@ const actions = {
                 .catch(err => { reject(err); });
         })
     },
-    [RANKINGS_SUMMARY]: () => {
+    [RANKINGS_SUMMARY]: ({commit, dispatch}) => {
         return new Promise((resolve, reject) => {
             apiCall({ url: api_routes.rankings.summary, method: "get"})
                 .then(resp => {
