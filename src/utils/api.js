@@ -27,16 +27,16 @@ export const api_routes = {
     claim: API_SERVER + "api/tokens"
   },
   awards: {
-    list_awards: "api/awards"
+    list_awards: API_SERVER + "api/awards"
   },
   sufficient_types: {
-    list_baseline: "api/sufficienttype/baseline",
-    list_personal: "api/sufficienttype/user"
+    list_baseline: API_SERVER + "api/sufficienttype/baseline",
+    list_personal: API_SERVER + "api/sufficienttype/user"
   },
   widgets: {
     quiz: {
-      get_question: "api/widgets/quiz/question",
-      answer_question: "api/widgets/quiz/question"
+      get_question: API_SERVER + "api/widgets/quiz/question",
+      answer_question: API_SERVER + "api/widgets/quiz/question"
     }
   }
 };

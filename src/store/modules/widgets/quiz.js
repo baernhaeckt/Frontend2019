@@ -8,6 +8,7 @@ import {
 const state = {
 
     question: {
+        noMoreQuestions: false,
         questionId: "",
         question: "",
         answers: []
@@ -41,7 +42,7 @@ const actions = {
   
             apiCall({ url: api_routes.widgets.quiz.answer_question, data: answer, method: "post" })
             .then(resp => { 
-                commit(QUIZ_ANSWER_QUESTION);  
+                commit(QUIZ_ANSWER_QUESTION, resp);  
                 resolve(resp); })
             .catch(err => { reject(err) });
         });
@@ -50,11 +51,19 @@ const actions = {
 
 const mutations = {
     [QUIZ_GET_QUESTION]: (state, resp) => {
-      state.answer.answered = false;
-      state.question = {
-        questionId: resp.id,
-        question: resp.question,
-        answers: resp.answers
+      console.log(resp)
+    if (false) {
+        state.question = {
+            noMoreQuestions: true
+        }
+      } else {
+        state.answer.answered = false;
+        state.question = {
+            noMoreQuestions: false,
+            questionId: resp.id,
+            question: resp.question,
+            answers: resp.answers
+        }
       }
     },
     [QUIZ_ANSWER_QUESTION]: (state, resp) => {
@@ -62,7 +71,7 @@ const mutations = {
             answered: true,
             points: resp.awardedPoints,
             detailedAnswer: resp.detailedAnswer,
-            isCorrectAnswer: resp.isCorrectAnswer
+            isCorrect: resp.isCorrect
         }
     } 
   };
