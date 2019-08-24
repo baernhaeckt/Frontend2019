@@ -3,6 +3,7 @@ import {
     RANKINGS_LIST_GLOBAL,
     RANKINGS_LIST_FRIENDS,
     RANKINGS_LIST_LOCAL,
+    RANKINGS_LIST_GENERIC,
     RANKINGS_SUMMARY
   } from "@/store/actions/rankings";
 import { apiCall, api_routes } from "@/utils/api";
@@ -33,13 +34,13 @@ const state = {
     summaryInited: false
 }
 const getters = {
-    global: state => state.rankings.global.users,
+    getGlobal: state => state.rankings.global.users,
     isGlobalInited: state => state.rankings.global.inited,
     lastRefreshGlobal: state => state.rankings.global.lastRefresh,
-    local: state => state.rankings.local.users,
+    getLocal: state => state.rankings.local.users,
     isLocalInited: state => state.rankings.local.inited,
     lastRefreshLocal: state => state.rankings.local.lastRefresh,
-    friends: state => state.rankings.friends.users,
+    getFriends: state => state.rankings.friends.users,
     isFriendsInited: state => state.rankings.friends.inited,
     lastRefreshFriends: state => state.rankings.friends.lastRefresh,
     getSummary: state => state.summary,
@@ -48,19 +49,19 @@ const getters = {
 
 const actions = {
     [RANKINGS_LIST_GLOBAL]: ({commit, dispatch}) => {
-        dispatch("RANKINGS_LIST_GENERIC", "global");
+        dispatch([RANKINGS_LIST_GENERIC], "global");
     },
     [RANKINGS_LIST_FRIENDS]: ({commit, dispatch}) => {
-        dispatch("RANKINGS_LIST_GENERIC", "friends");
+        dispatch([RANKINGS_LIST_GENERIC], "friends");
     },
     [RANKINGS_LIST_LOCAL]: ({commit, dispatch}) => {
-        dispatch("RANKINGS_LIST_GENERIC", "local");
+        dispatch([RANKINGS_LIST_GENERIC], "local");
     },
-    "RANKINGS_LIST_GENERIC": ({commit, dispatch}, identifier) => {        
+    [RANKINGS_LIST_GENERIC]: ({commit, dispatch}, identifier) => {        
         return new Promise((resolve, reject) => {
             apiCall({ url: api_routes.rankings["list_" + identifier], method: "get"})
                 .then(resp => {
-                    commit("RANKINGS_LIST_GENERIC", identifier, resp)
+                    commit(RANKINGS_LIST_GENERIC, [identifier, resp])
                     resolve(resp); 
                 })
                 .catch(err => { reject(err); });
@@ -79,10 +80,10 @@ const actions = {
 }
 
 const mutations = {
-    "RANKINGS_LIST_GENERIC": (state, identifier, resp) => {
-      state.rankings[identifier].users = resp;
-      state.rankings[identifier].lastRefresh = new Date();
-      state.rankings[identifier].inited = true
+    [RANKINGS_LIST_GENERIC]: (state, d) => {
+      state.rankings[d[0]].users = d[1];
+      state.rankings[d[0]].lastRefresh = new Date();
+      state.rankings[d[0]].inited = true
     },
     [RANKINGS_SUMMARY]: (state, resp) => {
         state.summary = {

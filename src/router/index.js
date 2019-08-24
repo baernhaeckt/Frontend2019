@@ -5,6 +5,7 @@ import Login from "@/views/auth/login";
 import App from "@/views/layouts/App";
 import Home from "@/views/home";
 import History from "@/views/history";
+import Rankings from "@/views/rankings";
 import Profile from "@/views/profile";
 import Token from "@/views/token";
 import Friends from "@/views/friends";
@@ -65,6 +66,12 @@ export default new Router({
           name: "history",
           beforeEnter: ifAuthenticated,
           component: History
+        },
+        {
+          path: "/rankings",
+          name: "rankings",
+          beforeEnter: ifAuthenticated,
+          component: Rankings
         }
       ]
     },

@@ -11,7 +11,8 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <b-button to="/history" class="mr-2"><font-awesome-icon :icon="['fas', 'landmark']" class="mr-2" /> History</b-button>
+        <b-button to="/rankings" class="mr-2"><font-awesome-icon :icon="['fas', 'trophy']" class="mr-2" /> Rangliste</b-button>
+        <b-button to="/history" class="mr-2"><font-awesome-icon :icon="['fas', 'landmark']" class="mr-2" /> Punkte</b-button>
         <b-button to="/friends" class="mr-2"><font-awesome-icon icon="users" class="mr-2" /> Freunde</b-button>
         <b-dropdown right href="#" variant="success">
           <template slot="button-content">
