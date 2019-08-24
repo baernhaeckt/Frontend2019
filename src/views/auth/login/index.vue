@@ -1,29 +1,31 @@
 <template>
   <b-row class="justify-content-md-center vh-100 overflow-hidden">
     <b-col cols="12" md="auto" class="m-auto auth-page">
-      <div class="logo"></div>
-      <transition-group tag="div" class="text-white" name="slide-left">
-        <div class="email-form" v-if="!needPassword && !isNewUser" key="emailform">
+      <transition-group tag="div" class="text-white clearfix" name="slide-left">
+        <div class="email-form auth-page-content" v-if="!needPassword && !isNewUser" key="emailform">
+          <div class="logo"></div>
           <h1>Identifikation</h1>
           <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
           <b-form @submit.prevent="checkEmail">
-            <b-form-group>
+            <b-input-group>
               <b-form-input id="email" v-model="email" type="email" required placeholder="E-Mail" />
-            </b-form-group>
-            <b-button variant="primary" type="submit">Weiter</b-button>
+              <b-button slot="append" variant="success" type="submit" class="next-button">Weiter</b-button>
+            </b-input-group>
           </b-form>
         </div>
-        <div class="password-form" v-if="needPassword" key="passwordform">
+        <div class="password-form auth-page-content" v-if="needPassword" key="passwordform">
+          <div class="logo"></div>
           <h1>Wilkommen zurück</h1>
           <p>Bitte bestätige Deinen Account mit Deinem persönlichen Passwort.</p>
           <b-form @submit.prevent="login">
-            <b-form-group>
+            <b-input-group>
               <b-form-input id="password" v-model="password" type="password" required placeholder="Passwort" />
-            </b-form-group>
-            <b-button variant="primary" type="submit">Login</b-button>
+              <b-button slot="append" variant="success" type="submit" class="next-button">Einloggen</b-button>
+            </b-input-group>
           </b-form>
         </div>
-        <div class="welcome-new-user" v-if="isNewUser" key="welcomenewuser">
+        <div class="welcome-new-user auth-page-content" v-if="isNewUser" key="welcomenewuser">
+          <div class="logo"></div>
           <h1>Herzlich willkommen</h1>
           <p>Danke hast Du Dich angemeldet. Wir haben Dir eine Email gesendet, damit Du Dein Profil vervollständigen kannst.</p>
           <b-button variant="primary" @click="acceptNewUserScreen">Loslegen</b-button>
@@ -78,14 +80,21 @@ export default {
 
 <style lang="scss">
 
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
 .auth-page {
-  padding: 30px;
-  border: 1px solid rgb(148, 89, 0);
-  border-radius: 20px;
-  background-image: url('/assets/cardboard_background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 4px 5px 20px 0px #333;
+
+  .auth-page-content {
+    padding: 30px;
+    border: 1px solid rgb(148, 89, 0);
+    border-radius: 20px;
+    background-image: url('/assets/cardboard_background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 4px 5px 20px 0px #333;
+  }
 
   .logo {
     background-image: url('/assets/logo.svg');
@@ -93,6 +102,14 @@ export default {
     background-repeat: no-repeat;
     margin-bottom: 30px;
     min-height: 55px;
+  }
+
+  .input-group {
+    .input-group-append {
+      .next-button {
+        @include border-right-radius($input-border-radius);
+      }
+    }
   }
 
   .email-form,

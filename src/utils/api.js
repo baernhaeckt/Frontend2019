@@ -7,7 +7,7 @@ export const api_routes = {
   user: {
     login: API_SERVER + "api/users/Login",
     check: API_SERVER + "api/users/Register",
-    me: API_SERVER + "api/users/current"
+    me: API_SERVER + "api/profile"
   }
 };
 
