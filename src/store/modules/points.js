@@ -1,5 +1,6 @@
 import {
-    POINTS_LIST
+    POINTS_LIST,
+    CURRENT_USER_POINTS_LIST
   } from "@/store/actions/points"
 import { apiCall, api_routes } from "@/utils/api";
 
