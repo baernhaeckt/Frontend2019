@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="sm" type="dark" variant="success">
-    <b-navbar-brand>
+    <b-navbar-brand to="/">
       <div class="logo"></div>
     </b-navbar-brand>
 
@@ -12,8 +12,8 @@
 
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right href="#">
-          <template slot="button-content">User</template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <template slot="button-content">{{ userNameOrEmail }}</template>
+          <b-dropdown-item to="profile">Dein Profil</b-dropdown-item>
           <b-dropdown-item @click="logout" href="#">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -23,9 +23,25 @@
 
 <script>
 import { AUTH_LOGOUT } from "@/store/actions/auth.js";
+import { USER_REQUEST } from "@/store/actions/user.js";
+import { mapGetters } from 'vuex'
 
 export default {
   name: "Navbar",
+  mounted () {
+    this.$store.dispatch(USER_REQUEST)
+  },
+  data() {
+    return {
+    };
+  },
+  computed: {
+    ...mapGetters(['getProfile']),
+    userNameOrEmail () {
+      let profile = this.getProfile
+      return profile.displayName || profile.email
+    }
+  },
   methods: {
     logout: function() {
       this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));

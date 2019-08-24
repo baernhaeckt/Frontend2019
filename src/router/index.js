@@ -4,6 +4,7 @@ import store from "../store";
 import Login from "@/views/auth/login";
 import App from "@/views/layouts/App";
 import Home from "@/views/home";
+import Profile from "@/views/profile";
 
 Vue.use(Router);
 
@@ -36,7 +37,14 @@ export default new Router({
         {
           path: "/",
           name: "home",
+          beforeEnter: ifAuthenticated,
           component: Home
+        },
+        {
+          path: "/profile",
+          name: "profile",
+          beforeEnter: ifAuthenticated,
+          component: Profile
         }
       ]
     },

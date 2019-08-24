@@ -41,7 +41,6 @@ const actions = {
             dispatch(USER_REQUEST);
             resolve(resp);
           } else {
-            console.log('asdf')
             commit(AUTH_ERROR, resp);
             localStorage.removeItem("user-token");
             reject(resp);
