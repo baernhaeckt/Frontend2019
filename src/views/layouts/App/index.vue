@@ -1,12 +1,18 @@
 <template>
   <div>
-    <p>TODO: Navbar</p>
+    <navbar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Navbar from './../Modules/Navigation'
+
 export default {
-  name: "App"
+  name: "App",
+
+  components: {
+    Navbar
+  }
 };
 </script>

@@ -1,48 +1,51 @@
 <template>
-  <b-row class="justify-content-md-center vh-100 overflow-hidden">
-    <b-col cols="12" md="auto" class="m-auto auth-page">
-      <div class="text-white clearfix">
-        <div class="email-form auth-page-content" v-if="!needPassword && !isNewUser" key="emailform">
-          <div class="logo"></div>
-          <h1>Identifikation</h1>
-          <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
-          <b-form @submit.prevent="checkEmail">
-            <b-input-group>
-              <b-form-input id="email" v-model="email" type="email" required placeholder="E-Mail" />
-              <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
-                <b-spinner small v-if="isLoading" />
-                Weiter
-              </b-button>
-            </b-input-group>
-          </b-form>
+  <b-container>
+    <b-row class="justify-content-md-center vh-100 overflow-hidden">
+      <b-col cols="12" md="auto" class="m-auto auth-page">
+        <div class="text-white clearfix">
+          <div class="email-form auth-page-content" v-if="!needPassword && !isNewUser" key="emailform">
+            <div class="logo"></div>
+            <h1>Identifikation</h1>
+            <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
+            <b-form @submit.prevent="checkEmail">
+              <b-input-group>
+                <b-form-input id="email" v-model="email" type="email" required placeholder="E-Mail" />
+                <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
+                  <b-spinner small v-if="isLoading" />
+                  Weiter
+                </b-button>
+              </b-input-group>
+            </b-form>
+          </div>
+          <div class="password-form auth-page-content" v-if="needPassword" key="passwordform">
+            <div class="logo"></div>
+            <h1>Wilkommen zurück</h1>
+            <p>Bitte bestätige Deinen Account mit Deinem persönlichen Passwort.</p>
+            <b-form @submit.prevent="login">
+              <b-input-group>
+                <b-form-input id="password" v-model="password" type="password" required placeholder="Passwort" />
+                <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
+                  <b-spinner small v-if="isLoading" />
+                  Einloggen
+                </b-button>
+              </b-input-group>
+            </b-form>
+          </div>
+          <div class="welcome-new-user auth-page-content" v-if="isNewUser" key="welcomenewuser">
+            <div class="logo"></div>
+            <h1>Herzlich willkommen</h1>
+            <p>Danke hast Du Dich angemeldet. Wir haben Dir eine Email gesendet, damit Du Dein Profil vervollständigen kannst.</p>
+            <b-button variant="success" class="float-right" @click="acceptNewUserScreen">Jetzt Loslegen</b-button>
+          </div>
         </div>
-        <div class="password-form auth-page-content" v-if="needPassword" key="passwordform">
-          <div class="logo"></div>
-          <h1>Wilkommen zurück</h1>
-          <p>Bitte bestätige Deinen Account mit Deinem persönlichen Passwort.</p>
-          <b-form @submit.prevent="login">
-            <b-input-group>
-              <b-form-input id="password" v-model="password" type="password" required placeholder="Passwort" />
-              <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
-                <b-spinner small v-if="isLoading" />
-                Einloggen
-              </b-button>
-            </b-input-group>
-          </b-form>
-        </div>
-        <div class="welcome-new-user auth-page-content" v-if="isNewUser" key="welcomenewuser">
-          <div class="logo"></div>
-          <h1>Herzlich willkommen</h1>
-          <p>Danke hast Du Dich angemeldet. Wir haben Dir eine Email gesendet, damit Du Dein Profil vervollständigen kannst.</p>
-          <b-button variant="success" class="float-right" @click="acceptNewUserScreen">Jetzt Loslegen</b-button>
-        </div>
-      </div>
-    </b-col>
-  </b-row>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 import { AUTH_REQUEST, AUTH_CHECK } from "@/store/actions/auth";
+
 export default {
   name: "Login",
   data() {
@@ -92,10 +95,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 
 .auth-page {
 

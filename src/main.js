@@ -6,7 +6,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueSnackbar from "vue-snack";
-import ButtonSpinner from "@/components/globals/ButtonSpinner";
 
 // loads the Icon plugin
 window._ = require("lodash");
@@ -15,11 +14,7 @@ require("vue-snack/dist/vue-snack.min.css");
 
 Vue.config.productionTip = false;
 
-window.Event = new Vue();
-
 Vue.use(VueSnackbar, {});
-
-Vue.component("button-spinner", ButtonSpinner);
 
 new Vue({
   router,
