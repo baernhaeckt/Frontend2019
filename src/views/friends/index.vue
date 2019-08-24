@@ -1,12 +1,18 @@
 <template>
   <div class="friends-page">
     <block-box>
-      <h1>Deine Freunde</h1>
+      <h1>Deine Freunde{{ showFriendsTable ? ` (${allFriends.length})` : '' }}</h1>
       <div v-if="!isLoaded" class="loader text-center">
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <b-table striped hover :items="allFriends" v-if="showFriendsTable">
+        <b-table striped hover :items="allFriends" :fields="tableFields" v-if="showFriendsTable">
+          <template slot="[actions]" slot-scope="data">
+            <b-button variant="danger" @click="removeFriend(data.item.id)" title="Freund entfernen">
+              <b-spinner small v-if="deleteFriendProcessingId === data.item.id" />
+              <font-awesome-icon icon="user-slash" v-else />
+            </b-button>
+          </template>
         </b-table>
         <div v-else class="no-friends">
           <font-awesome-icon :icon="['far', 'frown-open']" class="sad-user" />
@@ -21,7 +27,7 @@
         <b-input-group>
           <b-form-input id="friend-email" name="friend-email" v-model="friendEmailModel" type="text" required placeholder="E-Mail Adresse Deines Freundes eingeben" />
           <b-button slot="append" variant="success" type="submit" class="add-friend-button" :disabled="isFriendAddLoading" title="Freund hinzufügen">
-            <b-spinner small v-if="isFriendAddLoading" />
+            <b-spinner small v-if="isFriendAddLoading" class="mr-2" />
             <font-awesome-icon icon="check" v-if="friendAdded" class="mr-2" />
             <font-awesome-icon icon="times" v-if="friendAddedError" class="mr-2" />
             <font-awesome-icon icon="user-plus" />
@@ -51,7 +57,14 @@ export default {
       isFriendAddLoading: false,
       friendAdded: false,
       friendAddedError: false,
-      friendEmailModel: null
+      friendEmailModel: null,
+      deleteFriendProcessingId: null,
+      tableFields: [
+        { key: 'displayName', sortable: true, label: 'Name' },
+        { key: 'email', sortable: true, label: 'E-Mail Adresse'},
+        { key: 'points', sortable: true, label: 'Erzielte Punkte'},
+        { key: 'actions', label: ''}
+      ]
     }
   },
   computed: {
@@ -80,6 +93,16 @@ export default {
           this.friendAddedError = true
           this.isFriendAddLoading = false
         })
+    },
+    removeFriend (friendId) {
+      this.deleteFriendProcessingId = friendId
+      this.$store.dispatch(FRIENDS_REMOVE, friendId)
+        .then(() => {
+          this.deleteFriendProcessingId = null
+        })
+        .catch(() => {
+          this.deleteFriendProcessingId = null
+        });
     }
   }
 };

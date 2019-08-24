@@ -46,10 +46,10 @@ const actions = {
         });
     });
   },
-  [FRIENDS_REMOVE]: ({ commit, dispatch }, email) => {
+  [FRIENDS_REMOVE]: ({ commit, dispatch }, userId) => {
     return new Promise((resolve, reject) => {
       let axioParams = new URLSearchParams();
-      axioParams.append("friendEmail", email);
+      axioParams.append('friendUserId', userId)
 
       apiCall({
         url: api_routes.friends.remove,
