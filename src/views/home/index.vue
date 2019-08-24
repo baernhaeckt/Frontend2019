@@ -1,5 +1,7 @@
 <template>
   <div>
+    <b-button variant="danger" @click="logout">Logout</b-button>
+
     <h1>Welcome to your home screen!</h1>
   </div>
 </template>

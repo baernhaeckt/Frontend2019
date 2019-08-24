@@ -5,9 +5,9 @@ const API_SERVER = settings.API_SERVER;
 
 export const api_routes = {
   user: {
-    login: API_SERVER + "auth/login",
-    signup: API_SERVER + "auth/signup",
-    me: API_SERVER + "auth/me"
+    login: API_SERVER + "api/users/Login",
+    check: API_SERVER + "api/users/Register",
+    me: API_SERVER + "api/users/current"
   }
 };
 

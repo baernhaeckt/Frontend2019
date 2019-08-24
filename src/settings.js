@@ -1,4 +1,4 @@
 export const settings = {
-  APP_NAME: "Pure Awesomeness",
-  API_SERVER: "http://192.168.10.10/api/"
+  APP_NAME: "Familie Thunberg",
+  API_SERVER: "http://baernhaeckt.azurewebsites.net/"
 };
