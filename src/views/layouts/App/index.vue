@@ -6,6 +6,7 @@
         <b-col md="3">
           <ranking />
           <user-badges />
+          <widget-quiz />
         </b-col>
         <b-col><router-view></router-view></b-col>
       </b-row>
@@ -17,6 +18,7 @@
 import Navbar from './../Modules/Navigation'
 import Ranking from './../../../components/Ranking'
 import UserBadges from './../../../components/UserBadges'
+import WidgetQuiz from './../../../components/WidgetQuiz'
 
 export default {
   name: "App",
@@ -25,7 +27,8 @@ export default {
   components: {
     Navbar,
     Ranking,
-    UserBadges
+    UserBadges,
+    WidgetQuiz
   }
 };
 </script>

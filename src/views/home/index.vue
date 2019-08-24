@@ -1,19 +1,19 @@
 <template>
   <div>
     <google-map />
-    <widget-quiz />
+    <baseline-compare />
   </div>
 </template>
 
 <script>
 import GoogleMap from './../../components/GoogleMap'
-import WidgetQuiz from './../../components/WidgetQuiz'
+import BaselineCompare from './../../components/BaselineCompare'
 
 export default {
   name: "Home",
   components: {
     GoogleMap,
-    WidgetQuiz
+    BaselineCompare
   }
 };
 </script>

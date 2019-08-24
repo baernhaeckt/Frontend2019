@@ -13,24 +13,18 @@ const state = {
 }
 
 const getters = {
-    baseline: state => state.baseline,
+    getBaseline: state => state.baseline,
     isBaselineInited: state => state.baselineInited,
-    personal: state => state.personal,
+    getPersonal: state => state.personal,
     isPersonalInited: state => state.personalInited
 }
 
 const actions = {
     [LIST_SUFFICIENTS_BASELINE]: ({commit, dispatch}) => {        
         return new Promise((resolve, reject) => {
-            
-            // as the baseline is changing slowly this doesn't need to refresh if it is inited
-            if (baselineInited) {
-                resolve(state.baseline);
-            }
-
-            apiCall({ url: api_routes.sufficient_types.list_personal, method: "get"})
+            apiCall({ url: api_routes.sufficient_types.list_baseline, method: "get"})
                 .then(resp => {
-                    commit([LIST_SUFFICIENTS_BASELINE], resp)
+                    commit(LIST_SUFFICIENTS_BASELINE, resp)
                     resolve(resp); 
                 })
                 .catch(err => { reject(err); });
@@ -40,8 +34,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             apiCall({ url: api_routes.sufficient_types.list_personal, method: "get"})
                 .then(resp => {
-                    dispatch(LIST_SUFFICIENTS_BASELINE)
-                    commit([LIST_SUFFICIENTS_PERSONAL], resp)
+                    commit(LIST_SUFFICIENTS_PERSONAL, resp)
                     resolve(resp); 
                 })
                 .catch(err => { reject(err); });

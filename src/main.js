@@ -7,6 +7,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueSnackbar from "vue-snack";
+import VueGoogleCharts from 'vue-google-charts'
 
 import BlockBox from './components/BlockBox'
 
@@ -32,6 +33,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true
 
 Vue.use(VueSnackbar, {});
+Vue.use(VueGoogleCharts)
 
 window.newsfeed = newsfeed
 window.vueInstance = new Vue({

@@ -44,8 +44,11 @@ export default {
       let displayName = this.updatedProfile.displayName
       this.$store.dispatch(USER_UPDATE, displayName)
         .then(() => {
-          this.$snack.success({
-            text: 'Dein Profil wurde erfolgreich aktualisiert.'
+          this.$bvToast.toast('Dein Profil wurde erfolgreich aktualisiert.', {
+            title: 'Profil gespeichert',
+            variant: 'success',
+            solid: true,
+            autoHideDelay: 5000
           });
         })
     }
