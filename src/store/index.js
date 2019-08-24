@@ -7,6 +7,7 @@ import rankings from "./modules/rankings";
 import awards from "./modules/awards";
 import sufficient_types from "./modules/sufficient_types";
 import token from "./modules/token";
+import widget_quiz from "./modules/widgets/quiz";
 import settings from "./modules/settings";
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     awards,
     sufficient_types,
     token,
+    widget_quiz,
     settings
   },
   strict: debug
