@@ -2,7 +2,7 @@
   <b-row class="justify-content-md-center vh-100 overflow-hidden">
     <b-col cols="12" md="auto" class="m-auto auth-page">
       <div class="logo"></div>
-      <transition-group tag="div" name="slide-left">
+      <transition-group tag="div" class="text-white" name="slide-left">
         <div class="email-form" v-if="!needPassword && !isNewUser" key="emailform">
           <h1>Identifikation</h1>
           <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
