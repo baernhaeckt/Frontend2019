@@ -1,7 +1,7 @@
 <template>
   <b-row class="justify-content-md-center vh-100 overflow-hidden">
     <b-col cols="12" md="auto" class="m-auto auth-page">
-      <transition-group tag="div" class="text-white clearfix" name="slide-left">
+      <div class="text-white clearfix">
         <div class="email-form auth-page-content" v-if="!needPassword && !isNewUser" key="emailform">
           <div class="logo"></div>
           <h1>Identifikation</h1>
@@ -36,7 +36,7 @@
           <p>Danke hast Du Dich angemeldet. Wir haben Dir eine Email gesendet, damit Du Dein Profil vervollständigen kannst.</p>
           <b-button variant="success" class="float-right" @click="acceptNewUserScreen">Jetzt Loslegen</b-button>
         </div>
-      </transition-group>
+      </div>
     </b-col>
   </b-row>
 </template>
@@ -110,7 +110,7 @@ export default {
     box-shadow: 4px 5px 20px 0px #333;
 
     @include media-breakpoint-down(sm) {
-      max-width: inherit;
+      max-width: 100vw;
     }
   }
 
@@ -134,24 +134,6 @@ export default {
   .password-form,
   .welcome-new-user {
     float:left;
-  }
-
-  .slide-left-enter-active,
-  .slide-left-leave-active {
-    transition: transform 500ms ease-out;
-  }
-
-  .slide-left-enter {
-    transform: translateX(200%);
-  }
-
-  .slide-left-enter-to,
-  .slide-left-leave {
-    transform: translateX(0%);
-  }
-
-  .slide-left-leave-to {
-    transform: translateX(-200%);
   }
 }
 
