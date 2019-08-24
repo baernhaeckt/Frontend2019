@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import { AUTH_LOGOUT } from "@/store/actions/auth";
+import { TOKEN_PROCESS } from "@/store/actions/token";
+
 export default {
+  mounted() {
+    this.$store.dispatch(TOKEN_PROCESS)
+  },
   methods: {
-    logout() {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
-    }
   }
 };
 </script>

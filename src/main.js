@@ -14,6 +14,7 @@ window._ = require("lodash");
 require("vue-snack/dist/vue-snack.min.css");
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true
 
 Vue.use(VueSnackbar, {});
 

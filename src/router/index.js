@@ -5,6 +5,7 @@ import Login from "@/views/auth/login";
 import App from "@/views/layouts/App";
 import Home from "@/views/home";
 import Profile from "@/views/profile";
+import Token from "@/views/token";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: "/token/:token",
+      name: "token",
+      component: Token
+    },
     {
       path: "/",
       name: "app",

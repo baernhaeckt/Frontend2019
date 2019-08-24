@@ -12,7 +12,7 @@ const state = {
     inited: false
 }
 const getters = {
-    friends: state => state.friends
+    allFriends: state => state.friends
 }
 
 const actions = {

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div class="profile-page">
     <h1>Vervollständige jetzt Dein Profil</h1>
     <b-form @submit.prevent="updateProfile">
       <b-form-group label="E-Mail Adresse">
@@ -11,7 +11,7 @@
 
       <b-button type="submit" variant="success">Profil aktualisieren</b-button>
     </b-form>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -43,6 +43,11 @@ export default {
     updateProfile () {
       let displayName = this.updatedProfile.displayName
       this.$store.dispatch(USER_UPDATE, displayName)
+        .then(() => {
+          this.$snack.success({
+            text: 'Dein Profil wurde erfolgreich aktualisiert.'
+          });
+        })
     }
   }
 };

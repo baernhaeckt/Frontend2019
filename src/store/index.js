@@ -6,6 +6,7 @@ import friends from "./modules/friends";
 import rankings from "./modules/rankings";
 import awards from "./modules/awards";
 import sufficient_types from "./modules/sufficient_types";
+import token from "./modules/token";
 import settings from "./modules/settings";
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     rankings,
     awards,
     sufficient_types,
+    token,
     settings
   },
   strict: debug
