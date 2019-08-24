@@ -28,6 +28,10 @@ export const api_routes = {
   },
   awards: {
     list_awards: "api/awards"
+  },
+  sufficient_types: {
+    list_baseline: "api/sufficienttype/baseline",
+    list_personal: "api/sufficienttype/personal"
   }
 };
 
