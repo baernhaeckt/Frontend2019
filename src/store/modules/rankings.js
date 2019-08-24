@@ -2,7 +2,8 @@
 import {
     RANKINGS_LIST_GLOBAL,
     RANKINGS_LIST_FRIENDS,
-    RANKINGS_LIST_LOCAL
+    RANKINGS_LIST_LOCAL,
+    RANKINGS_SUMMARY
   } from "@/store/actions/rankings";
 import { apiCall, api_routes } from "@/utils/api";
 
@@ -65,7 +66,7 @@ const actions = {
                 .catch(err => { reject(err); });
         })
     },
-    [RANKINGS_SUMMARY]: () => {
+    [RANKINGS_SUMMARY]: ({commit, dispatch}) => {
         return new Promise((resolve, reject) => {
             apiCall({ url: api_routes.rankings.summary, method: "get"})
                 .then(resp => {
