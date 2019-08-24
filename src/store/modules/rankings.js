@@ -2,7 +2,8 @@
 import {
     RANKINGS_LIST_GLOBAL,
     RANKINGS_LIST_FRIENDS,
-    RANKINGS_LIST_LOCAL
+    RANKINGS_LIST_LOCAL,
+    RANKINGS_SUMMARY
   } from "@/store/actions/rankings";
 import { apiCall, api_routes } from "@/utils/api";
 
