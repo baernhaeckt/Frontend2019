@@ -6,6 +6,11 @@
       <div class="loader text-center" v-if="isLoading">
         <b-spinner class="large-spinner text-success" />
       </div>
+      <div v-show="showInfoWindowContent" class="info-window-content" ref="infoWindowChartContent" >
+        <GChart class="chart-container" type="ColumnChart"
+            :data="infoWindowData"
+            :options="chartOptions" />
+      </div>
     </div>
   </block-box>
 </template>
@@ -189,6 +194,10 @@ export default {
     }
 
     this.$store.dispatch(FRIENDS_LIST).then(() => {
+      var infoWindow = new google.maps.InfoWindow({
+        content: null,
+        maxHeight: 250
+      })
       this.allFriends.forEach(friend => {
         var marker = new google.maps.Marker({
           position: {
@@ -199,6 +208,12 @@ export default {
           map: this.map,
           title: `${friend.displayName || friend.email} - ${friend.points}`
         });
+
+        var self = this;
+
+        marker.addListener('click', function () {
+          self.openInfoWindowForFriend(infoWindow, friend, self.map, marker)
+        });
       });
 
       this.isLoading = false;
@@ -207,11 +222,48 @@ export default {
   data() {
     return {
       map: undefined,
-      isLoading: false
+      isLoading: false,
+      showInfoWindowContent: false,
+      infoWindowUser: null
     };
   },
   computed: {
-    ...mapGetters(["allFriends"])
+    ...mapGetters(['allFriends', 'getProfile']),
+    infoWindowData () {
+      let friend = this.infoWindowUser
+      let own = this.getProfile
+
+      if (friend === null || own === null) {
+        return []
+      }
+
+      return [
+        ['Name', 'Punkte'],
+        ['Du', own.points],
+        [friend.displayName || friend.email, friend.points]
+      ]
+    },
+    chartOptions () {
+      let friend = this.infoWindowUser
+      if (friend === null) {
+        return {}
+      }
+
+      return {
+        title: `Du im Vergleich zu ${friend.displayName || friend.email}`,
+        width: 250,
+        height: 175,
+        legend:{position:'none'}
+      }
+    }
+  },
+  methods: {
+    openInfoWindowForFriend (infoWindow, friend, map, marker) {
+      this.infoWindowUser = friend
+      this.showInfoWindowContent = true
+      infoWindow.setContent(this.$refs.infoWindowChartContent)
+      infoWindow.open(map, marker)
+    }
   }
 };
 </script>
@@ -223,6 +275,10 @@ export default {
   .google-maps-container {
     width: 100%;
     height: 50vh;
+  }
+
+  .info-window-content {
+    overflow: hidden;
   }
 
   .loader {
