@@ -28,10 +28,17 @@ import { mapGetters } from 'vuex';
 export default {
   name: "History",
   mounted() {
-    this.$store.dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
-      .then(() => {
-        this.isLoaded = true 
-      })
+    this.$store.watch(
+      (state, getters) => getters.isProfileLoaded,
+      (newValue, oldValue) => {
+        if (newValue) {
+          this.$store.dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
+            .then(() => {
+              this.isLoaded = true 
+            })
+        }
+      },
+    );
   },
   data() {
     return {

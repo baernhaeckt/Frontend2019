@@ -6,11 +6,12 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <div>
-            <button @click="setModeToGlobal" :disabled="currentMode === 'global'">Global</button>
-            <button @click="setModeToLocal" :disabled="currentMode === 'local'">Local</button>
-            <button @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</button>
-        </div>
+        <b-button-group size="lg" class="mb-4">
+            <b-button variant="info" @click="setModeToGlobal" :disabled="currentMode === 'global'">Global</b-button>
+            <b-button variant="info" @click="setModeToLocal" :disabled="currentMode === 'local'">Local</b-button>
+            <b-button variant="info" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
+        </b-button-group>
+
         <b-table striped hover :items="data" :fields="tableFields" v-if="isLoaded" />
       </template>
     </block-box>
@@ -40,10 +41,16 @@ export default {
   computed: {
     ...mapGetters(['getLocal', 'getGlobal', 'getFriends']),
     data() {
-        if (this.currentMode === "local") return this.getLocal;
-        if (this.currentMode === "global") return this.getGlobal;
-        if (this.currentMode === "friends") return this.getFriends;
-    }    
+        if (this.currentMode === "local") {
+          return this.getLocal;
+        }
+        if (this.currentMode === "global") {
+          return this.getGlobal;
+        }
+        if (this.currentMode === "friends") {
+          return this.getFriends;
+        }
+    }
   },
   watch: {  },
   methods: { 
@@ -72,43 +79,13 @@ export default {
 
 <style lang="scss">
 
-  .friends-page {
+  .rankings-page {
     .loader {
       margin: 50px 0;
 
       .large-spinner {
         width: 4rem;
         height: 4rem;
-      }
-    }
-
-    .no-friends {
-      text-align: center;
-      margin: 50px 0;
-
-      .sad-user {
-        color: $warning;
-        font-size: 4rem;
-      }
-
-      .no-friends-text {
-        margin-top: 20px;
-
-        .leaf-logo {
-          width: 60px;
-          height: 18px;
-          object-fit: cover;
-          object-position: left;
-          margin-top: -4px;
-        }
-      }
-    }
-
-    .input-group {
-      .input-group-append {
-        .add-friend-button {
-          @include border-right-radius($input-border-radius);
-        }
       }
     }
   }
