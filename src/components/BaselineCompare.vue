@@ -122,7 +122,7 @@ export default {
 .baseline-box {
   .chart-outer-container {
     position: relative;
-    padding-bottom: 100%;
+    padding-bottom: 50vh;
     height: 0;
     overflow: hidden;
 
