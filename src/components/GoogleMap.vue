@@ -1,6 +1,11 @@
 <template>
   <block-box>
     <h3>Deine Umgebung</h3>
+
+    <!--div class="m-5">
+      <font-awesome-icon :icon="['fab', 'pagelines']" class="color-green" style="width: 3rem;height: 3rem;" />
+    </div-->
+
     <div class="loading-container">
       <div class="google-maps-container" ref="mapscontainer" />
       <div class="loader text-center" v-if="isLoading">
@@ -195,6 +200,7 @@ export default {
             lat: friend.location.latitude,
             lng: friend.location.longitude
           },
+          icon: '/assets/leaf_marker.png',
           map: this.map,
           title: `${friend.displayName || friend.email} - ${friend.points}`
         });
