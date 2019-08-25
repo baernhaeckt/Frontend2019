@@ -35,35 +35,31 @@
 
 <script>
 import { RANKINGS_SUMMARY } from "@/store/actions/rankings.js";
-import BlockBox from './BlockBox'
-import { mapGetters } from 'vuex';
+import BlockBox from "./BlockBox";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Ranking",
   mounted() {
-    this.$store.dispatch(RANKINGS_SUMMARY)
-      .then(() => {
-        this.isLoading = false
-      })
+    this.$store.dispatch(RANKINGS_SUMMARY).then(() => {
+      this.isLoading = false;
+    });
   },
   data() {
     return {
       isLoading: true
-    }
+    };
   },
   computed: {
-    ...mapGetters(['getSummary']),
+    ...mapGetters(["getSummary"])
   },
-  watch: {
-  },
-  methods: {
-  },
-  components: {
-  }
+  watch: {},
+  methods: {},
+  components: {}
 };
 </script>
 
 <style lang="scss">
-  .ranking-box {
-  }
+.ranking-box {
+}
 </style>

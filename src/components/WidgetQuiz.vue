@@ -33,14 +33,17 @@
 </template>
 
 <script>
-import { QUIZ_GET_QUESTION, QUIZ_ANSWER_QUESTION } from "@/store/actions/widgets/quiz.js";
-import BlockBox from './BlockBox'
-import { mapGetters } from 'vuex';
+import {
+  QUIZ_GET_QUESTION,
+  QUIZ_ANSWER_QUESTION
+} from "@/store/actions/widgets/quiz.js";
+import BlockBox from "./BlockBox";
+import { mapGetters } from "vuex";
 
 export default {
   name: "WidgetQuiz",
   mounted() {
-    this.loadQuestion()
+    this.loadQuestion();
   },
   data() {
     return {
@@ -49,58 +52,59 @@ export default {
       isAnswerCheckLoading: false,
       answerChecked: false,
       answerCheckError: false,
-      selectedAnswer: ''
-    }
+      selectedAnswer: ""
+    };
   },
   computed: {
-    ...mapGetters(['getQuestion', 'getAnswer']),
-    quizReady () {
-      return !this.isLoading && this.initialized
+    ...mapGetters(["getQuestion", "getAnswer"]),
+    quizReady() {
+      return !this.isLoading && this.initialized;
     },
-    answers () {
-      return this.getQuestion.answers != null ? this.getQuestion.answers.map(answer => {
-        return {
-          text: answer,
-          value: answer
-        }
-      }) : []
+    answers() {
+      return this.getQuestion.answers != null
+        ? this.getQuestion.answers.map(answer => {
+            return {
+              text: answer,
+              value: answer
+            };
+          })
+        : [];
     }
   },
   methods: {
     loadQuestion() {
-      this.answerChecked = false
-      this.selectedAnswer = ''
-      this.isLoading = true
-      this.$store.dispatch(QUIZ_GET_QUESTION)
-      .then(() => {
-        this.isLoading = false
-        this.initialized = true
-      })
+      this.answerChecked = false;
+      this.selectedAnswer = "";
+      this.isLoading = true;
+      this.$store.dispatch(QUIZ_GET_QUESTION).then(() => {
+        this.isLoading = false;
+        this.initialized = true;
+      });
     },
-    checkAnswer () {
-      this.isAnswerCheckLoading = true
-      this.answerChecked = false
-      this.answerCheckError = false
+    checkAnswer() {
+      this.isAnswerCheckLoading = true;
+      this.answerChecked = false;
+      this.answerCheckError = false;
       let answer = {
         questionId: this.getQuestion.questionId,
         answers: [this.selectedAnswer]
-      }
-      this.$store.dispatch(QUIZ_ANSWER_QUESTION, answer)
+      };
+      this.$store
+        .dispatch(QUIZ_ANSWER_QUESTION, answer)
         .then(() => {
-          this.isAnswerCheckLoading = false
-          this.answerChecked = true
+          this.isAnswerCheckLoading = false;
+          this.answerChecked = true;
         })
-        .catch((err) => {
-          this.isAnswerCheckLoading = false
-          this.answerCheckError = true
-        })
+        .catch(err => {
+          this.isAnswerCheckLoading = false;
+          this.answerCheckError = true;
+        });
     },
-    loadNextQuestion () {
-      this.loadQuestion()
+    loadNextQuestion() {
+      this.loadQuestion();
     }
   },
-  watch: {
-  },
+  watch: {},
   components: {
     BlockBox
   }
@@ -108,14 +112,14 @@ export default {
 </script>
 
 <style lang="scss">
-  .quiz-widget {
-    .loader {
-      margin: 50px 0;
+.quiz-widget {
+  .loader {
+    margin: 50px 0;
 
-      .large-spinner {
-        width: 4rem;
-        height: 4rem;
-      }
+    .large-spinner {
+      width: 4rem;
+      height: 4rem;
     }
   }
+}
 </style>

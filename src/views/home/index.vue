@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import GoogleMap from './../../components/GoogleMap'
-import BaselineCompare from './../../components/BaselineCompare'
+import GoogleMap from "./../../components/GoogleMap";
+import BaselineCompare from "./../../components/BaselineCompare";
 
 export default {
   name: "Home",

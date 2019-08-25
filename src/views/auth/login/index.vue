@@ -49,7 +49,7 @@ import { AUTH_REQUEST, AUTH_CHECK } from "@/store/actions/auth";
 export default {
   name: "Login",
   mounted() {
-    this.$refs.emailInput.$el.focus()
+    this.$refs.emailInput.$el.focus();
   },
   data() {
     return {
@@ -62,32 +62,32 @@ export default {
   },
   methods: {
     checkEmail() {
-      this.isLoading = true
+      this.isLoading = true;
       this.$store
         .dispatch(AUTH_CHECK, this.email)
         .then(() => {
-          this.isNewUser = true
-          this.isLoading = false
+          this.isNewUser = true;
+          this.isLoading = false;
         })
-        .catch (error => {
-          this.needPassword = true
-          this.isLoading = false
+        .catch(error => {
+          this.needPassword = true;
+          this.isLoading = false;
           this.$nextTick(() => {
-            this.$refs.passwordInput.$el.focus()
-          })
-        })
+            this.$refs.passwordInput.$el.focus();
+          });
+        });
     },
     login() {
-      this.isLoading = true
+      this.isLoading = true;
       const { email, password } = this;
       this.$store
         .dispatch(AUTH_REQUEST, { email, password })
         .then(() => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$router.push("/");
         })
         .catch(error => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$snack.danger({
             text: error.message
           });
@@ -101,15 +101,13 @@ export default {
 </script>
 
 <style lang="scss">
-
 .auth-page {
-
   .auth-page-content {
     max-width: 50vw;
     padding: 30px;
     border: 1px solid rgb(148, 89, 0);
     border-radius: 20px;
-    background-image: url('/assets/cardboard_background.jpg');
+    background-image: url("/assets/cardboard_background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 4px 5px 20px 0px #333;
@@ -120,7 +118,7 @@ export default {
   }
 
   .logo {
-    background-image: url('/assets/logo.svg');
+    background-image: url("/assets/logo.svg");
     background-size: contain;
     background-repeat: no-repeat;
     margin-bottom: 30px;
@@ -138,8 +136,7 @@ export default {
   .email-form,
   .password-form,
   .welcome-new-user {
-    float:left;
+    float: left;
   }
 }
-
 </style>

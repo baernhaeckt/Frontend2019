@@ -5,30 +5,24 @@
 </template>
 
 <script>
-
 export default {
   name: "BlockBox",
-  mounted() {
-  },
+  mounted() {},
   data() {
-    return {
-    }
+    return {};
   },
-  computed: {
-  },
-  watch: {
-  },
-  methods: {
-  }
+  computed: {},
+  watch: {},
+  methods: {}
 };
 </script>
 
 <style lang="scss">
-  .block-box {
-    padding: 10px;
-    border: 1px solid lighten(#926649, 30%);
-    background-color: lighten(#926649, 50%);
+.block-box {
+  padding: 10px;
+  border: 1px solid lighten(#926649, 30%);
+  background-color: lighten(#926649, 50%);
 
-    margin-bottom: 20px;
-  }
+  margin-bottom: 20px;
+}
 </style>

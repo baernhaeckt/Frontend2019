@@ -16,7 +16,7 @@ export const api_routes = {
     remove: API_SERVER + "api/friends"
   },
   points: {
-    list: API_SERVER + "api/users/{userId}/points",
+    list: API_SERVER + "api/users/{userId}/points"
   },
   rankings: {
     list_global: API_SERVER + "api/rankings/global",
@@ -44,10 +44,10 @@ export const api_routes = {
 
 const urlReplace = (url, urlData) => {
   for (let prop in urlData) {
-    url = url.replace(`{${prop}}`, urlData[prop])
+    url = url.replace(`{${prop}}`, urlData[prop]);
   }
-  return url
-}
+  return url;
+};
 
 export const apiCall = ({ url, method, urlData, ...args }) =>
   new Promise((resolve, reject) => {

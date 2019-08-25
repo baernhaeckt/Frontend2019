@@ -15,36 +15,37 @@
 
 <script>
 import { AWARDS_LIST } from "@/store/actions/awards";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "UserBadges",
   mounted() {
-    this.isLoading = true
-    this.$store.dispatch(AWARDS_LIST)
+    this.isLoading = true;
+    this.$store
+      .dispatch(AWARDS_LIST)
       .then(() => {
-        this.isLoading = false
+        this.isLoading = false;
       })
       .catch(() => {
-        this.isLoading = false
-      })
+        this.isLoading = false;
+      });
   },
   data() {
     return {
       isLoading: false,
       iconMap: {
-        'Onboarding': 'door-open',
-        'TrashHero': 'trash-alt'
+        Onboarding: "door-open",
+        TrashHero: "trash-alt"
       }
     };
   },
   computed: {
-    ...mapGetters(['allAwards']),
+    ...mapGetters(["allAwards"])
   },
   watch: {},
   methods: {
     getIconForAwardKind(awardKind) {
-      return this.iconMap[awardKind]
+      return this.iconMap[awardKind];
     }
   },
   components: {}
@@ -54,12 +55,12 @@ export default {
 <style lang="scss">
 .award-box {
   .loader {
-      margin: 50px 0;
+    margin: 50px 0;
 
-      .large-spinner {
-        width: 4rem;
-        height: 4rem;
-      }
+    .large-spinner {
+      width: 4rem;
+      height: 4rem;
     }
+  }
 }
 </style>

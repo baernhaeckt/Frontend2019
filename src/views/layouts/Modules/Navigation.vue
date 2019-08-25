@@ -29,22 +29,21 @@
 <script>
 import { AUTH_LOGOUT } from "@/store/actions/auth.js";
 import { USER_REQUEST } from "@/store/actions/user.js";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   name: "Navbar",
-  mounted () {
-    this.$store.dispatch(USER_REQUEST)
+  mounted() {
+    this.$store.dispatch(USER_REQUEST);
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
-    ...mapGetters(['getProfile']),
-    userNameOrEmail () {
-      let profile = this.getProfile
-      return profile.displayName || profile.email
+    ...mapGetters(["getProfile"]),
+    userNameOrEmail() {
+      let profile = this.getProfile;
+      return profile.displayName || profile.email;
     }
   },
   methods: {
@@ -56,21 +55,21 @@ export default {
 </script>
 
 <style lang="scss">
-  .navbar {
-    background-image: url('/assets/cardboard_background.jpg');
-    background-repeat: repeat-x;
+.navbar {
+  background-image: url("/assets/cardboard_background.jpg");
+  background-repeat: repeat-x;
 
-    .logo {
-      background-image: url('/assets/logo.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      min-height: 55px;
-      min-width: 215px;
+  .logo {
+    background-image: url("/assets/logo.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 55px;
+    min-width: 215px;
 
-      @include media-breakpoint-down(sm) {
-        min-width: 250px;
-        min-height: 45px;
-      }
+    @include media-breakpoint-down(sm) {
+      min-width: 250px;
+      min-height: 45px;
     }
   }
+}
 </style>

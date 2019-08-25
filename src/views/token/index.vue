@@ -9,18 +9,14 @@ import { TOKEN_STORE } from "@/store/actions/token";
 export default {
   name: "Token",
   mounted() {
-    this.$store.dispatch(TOKEN_STORE, this.$route.params.token)
+    this.$store.dispatch(TOKEN_STORE, this.$route.params.token);
     this.$router.push("/");
   },
   data() {
-    return {
-    }
+    return {};
   },
-  computed: {
-  },
-  watch: {
-  },
-  methods: {
-  }
+  computed: {},
+  watch: {},
+  methods: {}
 };
 </script>

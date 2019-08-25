@@ -10,7 +10,7 @@ import {
 import { USER_REQUEST } from "../actions/user";
 import { apiCall, api_routes } from "@/utils/api";
 import router from "./../../router";
-import axios from "axios"
+import axios from "axios";
 
 const state = {
   token: localStorage.getItem("user-token") || "",
@@ -28,16 +28,20 @@ const actions = {
   [AUTH_CHECK]: ({ commit, dispatch }, email) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST);
-      let axioParams = new URLSearchParams()
-      axioParams.append('email', email)
+      let axioParams = new URLSearchParams();
+      axioParams.append("email", email);
 
-      apiCall({ url: api_routes.user.check, params: axioParams, method: "post" })
+      apiCall({
+        url: api_routes.user.check,
+        params: axioParams,
+        method: "post"
+      })
         .then(resp => {
           if (resp.token && resp.token.length > 0) {
             localStorage.setItem("user-token", resp.token);
             // Here set the header of your ajax library to the token value.
             // example with axios
-            axios.defaults.headers.common['Authorization'] = resp.token
+            axios.defaults.headers.common["Authorization"] = resp.token;
             commit(AUTH_SUCCESS, resp);
             dispatch(USER_REQUEST);
             resolve(resp);
@@ -57,11 +61,15 @@ const actions = {
   [AUTH_REQUEST]: ({ commit, dispatch }, user) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST);
-      let axioParams = new URLSearchParams()
-      axioParams.append('email', user.email)
-      axioParams.append('password', user.password)
+      let axioParams = new URLSearchParams();
+      axioParams.append("email", user.email);
+      axioParams.append("password", user.password);
 
-      apiCall({ url: api_routes.user.login, params: axioParams, method: "post" })
+      apiCall({
+        url: api_routes.user.login,
+        params: axioParams,
+        method: "post"
+      })
         .then(resp => {
           localStorage.setItem("user-token", resp.token);
           // Here set the header of your ajax library to the token value.

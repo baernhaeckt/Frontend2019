@@ -16,41 +16,39 @@
 
 <script>
 import { USER_REQUEST, USER_UPDATE } from "@/store/actions/user";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "Profile",
   mounted() {
-    this.$store.dispatch(USER_REQUEST)
-      .then(() => {
-        this.profile = JSON.parse(JSON.stringify(this.$store.getters.getProfile))
-      })
+    this.$store.dispatch(USER_REQUEST).then(() => {
+      this.profile = JSON.parse(JSON.stringify(this.$store.getters.getProfile));
+    });
   },
   data() {
     return {
       updatedProfile: {}
-    }
+    };
   },
   computed: {
-    ...mapGetters(['getProfile'])
+    ...mapGetters(["getProfile"])
   },
   watch: {
     getProfile(newValue, oldValue) {
-      this.updatedProfile = JSON.parse(JSON.stringify(this.getProfile))
+      this.updatedProfile = JSON.parse(JSON.stringify(this.getProfile));
     }
   },
   methods: {
-    updateProfile () {
-      let displayName = this.updatedProfile.displayName
-      this.$store.dispatch(USER_UPDATE, displayName)
-        .then(() => {
-          this.$bvToast.toast('Dein Profil wurde erfolgreich aktualisiert.', {
-            title: 'Profil gespeichert',
-            variant: 'success',
-            solid: true,
-            autoHideDelay: 5000
-          });
-        })
+    updateProfile() {
+      let displayName = this.updatedProfile.displayName;
+      this.$store.dispatch(USER_UPDATE, displayName).then(() => {
+        this.$bvToast.toast("Dein Profil wurde erfolgreich aktualisiert.", {
+          title: "Profil gespeichert",
+          variant: "success",
+          solid: true,
+          autoHideDelay: 5000
+        });
+      });
     }
   }
 };

@@ -7,7 +7,7 @@ import rankings from "./modules/rankings";
 import awards from "./modules/awards";
 import sufficient_types from "./modules/sufficient_types";
 import token from "./modules/token";
-import points from "./modules/points"
+import points from "./modules/points";
 import widget_quiz from "./modules/widgets/quiz";
 import settings from "./modules/settings";
 Vue.use(Vuex);

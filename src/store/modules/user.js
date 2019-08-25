@@ -1,4 +1,9 @@
-import { USER_REQUEST, USER_UPDATE, USER_ERROR, USER_SUCCESS } from "../actions/user";
+import {
+  USER_REQUEST,
+  USER_UPDATE,
+  USER_ERROR,
+  USER_SUCCESS
+} from "../actions/user";
 import { apiCall, api_routes } from "@/utils/api";
 import { AUTH_LOGOUT } from "../actions/auth";
 
@@ -16,30 +21,33 @@ const actions = {
       apiCall({ url: api_routes.user.me })
         .then(resp => {
           commit(USER_SUCCESS, resp);
-          resolve()
+          resolve();
         })
         .catch(err => {
           commit(USER_ERROR);
           // if resp is unauthorized, logout, too
           dispatch(AUTH_LOGOUT);
-          reject()
+          reject();
         });
     });
   },
   [USER_UPDATE]: ({ commit, dispatch }, displayName) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.user.update, data: { displayName: displayName }, method: "patch" })
+      apiCall({
+        url: api_routes.user.update,
+        data: { displayName: displayName },
+        method: "patch"
+      })
         .then(resp => {
-          dispatch(USER_REQUEST)
-            .then(() => {
-              resolve()
-            })
+          dispatch(USER_REQUEST).then(() => {
+            resolve();
+          });
         })
         .catch(err => {
           commit(USER_ERROR);
           // if resp is unauthorized, logout, too
           dispatch(AUTH_LOGOUT);
-          reject()
+          reject();
         });
     });
   }

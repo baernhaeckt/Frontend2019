@@ -49,7 +49,7 @@ const actions = {
   [FRIENDS_REMOVE]: ({ commit, dispatch }, userId) => {
     return new Promise((resolve, reject) => {
       let axioParams = new URLSearchParams();
-      axioParams.append('friendUserId', userId)
+      axioParams.append("friendUserId", userId);
 
       apiCall({
         url: api_routes.friends.remove,

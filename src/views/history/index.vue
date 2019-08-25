@@ -21,9 +21,8 @@
 </template>
 
 <script>
-
 import { POINTS_LIST } from "@/store/actions/points";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "History",
@@ -32,51 +31,50 @@ export default {
       (state, getters) => getters.isProfileLoaded,
       (newValue, oldValue) => {
         if (newValue) {
-          this.$store.dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
+          this.$store
+            .dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
             .then(() => {
-              this.isLoaded = true 
-            })
+              this.isLoaded = true;
+            });
         }
-      },
+      }
     );
   },
   data() {
     return {
       isLoaded: false,
       tableFields: [
-        { key: 'text', sortable: true, label: 'Aktion' },
-        { key: 'value', sortable: true, label: 'Punkte'},
-        { key: 'date', sortable: true, label: 'Datum'},
-        { key: 'co2Saving', label: 'CO2 Ersparnisse'}
+        { key: "text", sortable: true, label: "Aktion" },
+        { key: "value", sortable: true, label: "Punkte" },
+        { key: "date", sortable: true, label: "Datum" },
+        { key: "co2Saving", label: "CO2 Ersparnisse" }
       ]
-    }
+    };
   },
   computed: {
-    ...mapGetters(['getPoints']),
-    hasPoints () {
-      return this.isLoaded && this.getPoints.length > 0
+    ...mapGetters(["getPoints"]),
+    hasPoints() {
+      return this.isLoaded && this.getPoints.length > 0;
     }
   },
-  watch: {  },
-  methods: {  }
+  watch: {},
+  methods: {}
 };
 </script>
 
 <style lang="scss">
+.history-page {
+  .loader {
+    margin: 50px 0;
 
-  .history-page {
-    .loader {
-      margin: 50px 0;
-
-      .large-spinner {
-        width: 4rem;
-        height: 4rem;
-      }
-    }
-
-    .table {
-      min-width: 700px;
+    .large-spinner {
+      width: 4rem;
+      height: 4rem;
     }
   }
 
+  .table {
+    min-width: 700px;
+  }
+}
 </style>

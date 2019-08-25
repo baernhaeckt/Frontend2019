@@ -39,17 +39,19 @@
 </template>
 
 <script>
-
-import { FRIENDS_LIST, FRIENDS_ADD, FRIENDS_REMOVE } from "@/store/actions/friends";
-import { mapGetters } from 'vuex';
+import {
+  FRIENDS_LIST,
+  FRIENDS_ADD,
+  FRIENDS_REMOVE
+} from "@/store/actions/friends";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Friends",
   mounted() {
-    this.$store.dispatch(FRIENDS_LIST)
-      .then(() => {
-        this.isLoaded = true 
-      })
+    this.$store.dispatch(FRIENDS_LIST).then(() => {
+      this.isLoaded = true;
+    });
   },
   data() {
     return {
@@ -60,48 +62,49 @@ export default {
       friendEmailModel: null,
       deleteFriendProcessingId: null,
       tableFields: [
-        { key: 'displayName', sortable: true, label: 'Name' },
-        { key: 'email', sortable: true, label: 'E-Mail Adresse'},
-        { key: 'points', sortable: true, label: 'Erzielte Punkte'},
-        { key: 'actions', label: ''}
+        { key: "displayName", sortable: true, label: "Name" },
+        { key: "email", sortable: true, label: "E-Mail Adresse" },
+        { key: "points", sortable: true, label: "Erzielte Punkte" },
+        { key: "actions", label: "" }
       ]
-    }
+    };
   },
   computed: {
-    ...mapGetters(['allFriends']),
-    haveFriends () {
-      return this.isLoaded && this.allFriends.length > 0
+    ...mapGetters(["allFriends"]),
+    haveFriends() {
+      return this.isLoaded && this.allFriends.length > 0;
     },
-    showFriendsTable () {
-      return this.isLoaded && this.haveFriends
+    showFriendsTable() {
+      return this.isLoaded && this.haveFriends;
     }
   },
-  watch: {
-  },
+  watch: {},
   methods: {
-    addFriend () {
-      this.friendAdded = false
-      this.friendAddedError = false
-      this.isFriendAddLoading = true
-      this.$store.dispatch(FRIENDS_ADD, this.friendEmailModel)
+    addFriend() {
+      this.friendAdded = false;
+      this.friendAddedError = false;
+      this.isFriendAddLoading = true;
+      this.$store
+        .dispatch(FRIENDS_ADD, this.friendEmailModel)
         .then(() => {
-          this.isFriendAddLoading = false
-          this.friendEmailModel = null
-          this.friendAdded = true
+          this.isFriendAddLoading = false;
+          this.friendEmailModel = null;
+          this.friendAdded = true;
         })
         .catch(() => {
-          this.friendAddedError = true
-          this.isFriendAddLoading = false
-        })
+          this.friendAddedError = true;
+          this.isFriendAddLoading = false;
+        });
     },
-    removeFriend (friendId) {
-      this.deleteFriendProcessingId = friendId
-      this.$store.dispatch(FRIENDS_REMOVE, friendId)
+    removeFriend(friendId) {
+      this.deleteFriendProcessingId = friendId;
+      this.$store
+        .dispatch(FRIENDS_REMOVE, friendId)
         .then(() => {
-          this.deleteFriendProcessingId = null
+          this.deleteFriendProcessingId = null;
         })
         .catch(() => {
-          this.deleteFriendProcessingId = null
+          this.deleteFriendProcessingId = null;
         });
     }
   }
@@ -109,50 +112,48 @@ export default {
 </script>
 
 <style lang="scss">
+.friends-page {
+  .loader {
+    margin: 50px 0;
 
-  .friends-page {
-    .loader {
-      margin: 50px 0;
-
-      .large-spinner {
-        width: 4rem;
-        height: 4rem;
-      }
-    }
-
-    .no-friends {
-      text-align: center;
-      margin: 50px 0;
-
-      .sad-user {
-        color: $warning;
-        font-size: 4rem;
-      }
-
-      .no-friends-text {
-        margin-top: 20px;
-
-        .leaf-logo {
-          width: 60px;
-          height: 18px;
-          object-fit: cover;
-          object-position: left;
-          margin-top: -4px;
-        }
-      }
-    }
-
-    .input-group {
-      .input-group-append {
-        .add-friend-button {
-          @include border-right-radius($input-border-radius);
-        }
-      }
-    }
-
-    .table {
-      min-width: 600px;
+    .large-spinner {
+      width: 4rem;
+      height: 4rem;
     }
   }
 
+  .no-friends {
+    text-align: center;
+    margin: 50px 0;
+
+    .sad-user {
+      color: $warning;
+      font-size: 4rem;
+    }
+
+    .no-friends-text {
+      margin-top: 20px;
+
+      .leaf-logo {
+        width: 60px;
+        height: 18px;
+        object-fit: cover;
+        object-position: left;
+        margin-top: -4px;
+      }
+    }
+  }
+
+  .input-group {
+    .input-group-append {
+      .add-friend-button {
+        @include border-right-radius($input-border-radius);
+      }
+    }
+  }
+
+  .table {
+    min-width: 600px;
+  }
+}
 </style>

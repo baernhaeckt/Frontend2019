@@ -18,23 +18,28 @@
 </template>
 
 <script>
-import Navbar from './../Modules/Navigation'
-import Ranking from './../../../components/Ranking'
-import UserBadges from './../../../components/UserBadges'
-import WidgetQuiz from './../../../components/WidgetQuiz'
+import Navbar from "./../Modules/Navigation";
+import Ranking from "./../../../components/Ranking";
+import UserBadges from "./../../../components/UserBadges";
+import WidgetQuiz from "./../../../components/WidgetQuiz";
 
 export default {
   name: "App",
   mounted() {
-    let toggler = this.$refs.navigationBar.$el.getElementsByClassName('navbar-toggler')
-    let visibility = toggler !== undefined ? window.getComputedStyle(toggler[0], null).getPropertyValue('display') : 'none';
-    if (visibility !== 'none') {
-      if (this.$route.name === 'home') {
-        this.sidebarVisible = true
-        this.sidebarToggleable = false
+    let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
+      "navbar-toggler"
+    );
+    let visibility =
+      toggler !== undefined
+        ? window.getComputedStyle(toggler[0], null).getPropertyValue("display")
+        : "none";
+    if (visibility !== "none") {
+      if (this.$route.name === "home") {
+        this.sidebarVisible = true;
+        this.sidebarToggleable = false;
       } else {
-        this.sidebarVisible = false
-        this.sidebarToggleable = true
+        this.sidebarVisible = false;
+        this.sidebarToggleable = true;
       }
     }
   },
@@ -42,21 +47,27 @@ export default {
     return {
       sidebarVisible: true,
       sidebarToggleable: false
-    }
+    };
   },
-  methods: {
-  },
+  methods: {},
   watch: {
-    '$route' (to, from){
-      let toggler = this.$refs.navigationBar.$el.getElementsByClassName('navbar-toggler')
-      let visibility = toggler !== undefined ? window.getComputedStyle(toggler[0], null).getPropertyValue('display') : 'none';
-      if (visibility !== 'none') {
-        if (from.name === 'home') {
-          this.sidebarVisible = false
-          this.sidebarToggleable = true
-        } else if (to.name === 'home') {
-          this.sidebarVisible = true
-          this.sidebarToggleable = false
+    $route(to, from) {
+      let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
+        "navbar-toggler"
+      );
+      let visibility =
+        toggler !== undefined
+          ? window
+              .getComputedStyle(toggler[0], null)
+              .getPropertyValue("display")
+          : "none";
+      if (visibility !== "none") {
+        if (from.name === "home") {
+          this.sidebarVisible = false;
+          this.sidebarToggleable = true;
+        } else if (to.name === "home") {
+          this.sidebarVisible = true;
+          this.sidebarToggleable = false;
         }
       }
     }
@@ -71,8 +82,8 @@ export default {
 </script>
 
 <style lang="scss">
-  .main {
-    margin-top: 30px;
-    min-height: calc(100vh - 30px - 81px);
-  }
+.main {
+  margin-top: 30px;
+  min-height: calc(100vh - 30px - 81px);
+}
 </style>
