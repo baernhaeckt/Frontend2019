@@ -192,7 +192,7 @@ export default {
         text: error
       });
     }
-
+    
     this.$store.dispatch(FRIENDS_LIST).then(() => {
       var infoWindow = new google.maps.InfoWindow({
         content: null,
@@ -217,6 +217,15 @@ export default {
       });
 
       this.isLoading = false;
+
+      this.$nextTick(() => {
+        var self = this
+        window.addEventListener('resize', () => {
+          var currCenter = self.map.getCenter();
+          google.maps.event.trigger(self.map, 'resize');
+          self.map.setCenter(currCenter);
+        })
+      })
     });
   },
   data() {
