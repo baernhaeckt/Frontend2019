@@ -6,10 +6,10 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <b-button-group size="lg" class="mb-4">
-            <b-button variant="info" @click="setModeToGlobal" :disabled="currentMode === 'global'">Global</b-button>
-            <b-button variant="info" @click="setModeToLocal" :disabled="currentMode === 'local'">Local</b-button>
-            <b-button variant="info" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
+        <b-button-group size="lg" class="mt-3 mb-4 switch-buttons">
+            <b-button variant="success" @click="setModeToGlobal" :disabled="currentMode === 'global'">Global</b-button>
+            <b-button variant="success" @click="setModeToLocal" :disabled="currentMode === 'local'">Local</b-button>
+            <b-button variant="success" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
         </b-button-group>
 
         <b-table striped hover :items="data" :fields="tableFields" v-if="isLoaded" />
@@ -84,6 +84,10 @@ export default {
       width: 4rem;
       height: 4rem;
     }
+  }
+
+  .switch-buttons {
+    width: 100%;
   }
 }
 </style>

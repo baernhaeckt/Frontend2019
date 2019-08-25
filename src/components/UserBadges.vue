@@ -4,12 +4,13 @@
     <div v-if="isLoading" class="loader text-center">
       <b-spinner class="large-spinner text-success" />
     </div>
-    <ul class="list-unstyled" v-for="award in allAwards" v-bind:key="award.title" v-else>
+    <ul class="list-unstyled" v-for="award in allAwards" v-bind:key="award.title" v-else-if="allAwards.length > 0">
       <li>
         <font-awesome-icon :icon="getIconForAwardKind(award.kind)" class="mr-2 color-green" />
         {{award.title}}
       </li>
     </ul>
+    <p v-else>Du hast leider noch keine Auszeichnungen erhalten. Sammle weiter Punkte um bald eine Auszeichnung zu erhalten.</p>
   </block-box>
 </template>
 

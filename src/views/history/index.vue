@@ -22,23 +22,20 @@
 
 <script>
 import { POINTS_LIST } from "@/store/actions/points";
+import { USER_REQUEST } from "@/store/actions/user";
 import { mapGetters } from "vuex";
 
 export default {
   name: "History",
   mounted() {
-    this.$store.watch(
-      (state, getters) => getters.isProfileLoaded,
-      (newValue, oldValue) => {
-        if (newValue) {
-          this.$store
-            .dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
-            .then(() => {
-              this.isLoaded = true;
-            });
-        }
-      }
-    );
+    this.$store.dispatch(USER_REQUEST)
+      .then(() => {
+        this.$store
+          .dispatch(POINTS_LIST, this.$store.getters.getProfile.id)
+          .then(() => {
+            this.isLoaded = true;
+          });
+      })
   },
   data() {
     return {
