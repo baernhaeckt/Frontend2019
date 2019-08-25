@@ -6,7 +6,7 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <b-table striped hover :items="allFriends" :fields="tableFields" v-if="showFriendsTable">
+        <b-table striped responsive hover :items="allFriends" :fields="tableFields" v-if="showFriendsTable">
           <template slot="[actions]" slot-scope="data">
             <b-button variant="danger" @click="removeFriend(data.item.id)" title="Freund entfernen">
               <b-spinner small v-if="deleteFriendProcessingId === data.item.id" />
@@ -148,6 +148,10 @@ export default {
           @include border-right-radius($input-border-radius);
         }
       }
+    }
+
+    .table {
+      min-width: 600px;
     }
   }
 

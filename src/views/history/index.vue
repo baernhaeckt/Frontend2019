@@ -6,7 +6,7 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <b-table striped hover :items="getPoints" :fields="tableFields" v-if="hasPoints">
+        <b-table striped responsive hover :items="getPoints" :fields="tableFields" v-if="hasPoints">
           
         </b-table>
         <div v-else class="no-points">
@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss">
 
-  .friends-page {
+  .history-page {
     .loader {
       margin: 50px 0;
 
@@ -67,34 +67,8 @@ export default {
       }
     }
 
-    .no-friends {
-      text-align: center;
-      margin: 50px 0;
-
-      .sad-user {
-        color: $warning;
-        font-size: 4rem;
-      }
-
-      .no-friends-text {
-        margin-top: 20px;
-
-        .leaf-logo {
-          width: 60px;
-          height: 18px;
-          object-fit: cover;
-          object-position: left;
-          margin-top: -4px;
-        }
-      }
-    }
-
-    .input-group {
-      .input-group-append {
-        .add-friend-button {
-          @include border-right-radius($input-border-radius);
-        }
-      }
+    .table {
+      min-width: 700px;
     }
   }
 
