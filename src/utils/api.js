@@ -16,7 +16,7 @@ export const api_routes = {
     remove: API_SERVER + "api/friends"
   },
   points: {
-    list: API_SERVER + "api/users/{userId}/points"
+    list: API_SERVER + "api/points"
   },
   rankings: {
     list_global: API_SERVER + "api/rankings/global",
@@ -36,8 +36,8 @@ export const api_routes = {
   },
   widgets: {
     quiz: {
-      get_question: API_SERVER + "api/widgets/quiz/question",
-      answer_question: API_SERVER + "api/widgets/quiz/question"
+      get_question: API_SERVER + "api/quiz",
+      answer_question: API_SERVER + "api/quiz"
     }
   }
 };

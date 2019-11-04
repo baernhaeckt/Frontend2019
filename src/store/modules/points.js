@@ -14,7 +14,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       apiCall({
         url: api_routes.points.list,
-        urlData: { userId: userId },
         method: "get"
       })
         .then(resp => {

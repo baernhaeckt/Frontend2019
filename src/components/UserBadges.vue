@@ -35,8 +35,8 @@ export default {
     return {
       isLoading: false,
       iconMap: {
-        Onboarding: "door-open",
-        TrashHero: "trash-alt"
+        OnboardingAward: "door-open",
+        TrashHeroAward: "trash-alt"
       }
     };
   },
