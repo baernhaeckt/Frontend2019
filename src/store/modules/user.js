@@ -31,11 +31,11 @@ const actions = {
         });
     });
   },
-  [USER_UPDATE]: ({ commit, dispatch }, displayName) => {
+  [USER_UPDATE]: ({ commit, dispatch }, displayName, street, city, postalCode) => {
     return new Promise((resolve, reject) => {
       apiCall({
         url: api_routes.user.update,
-        data: { displayName: displayName },
+        data: { displayName: displayName, street: street, city: city, postalCode: postalCode },
         method: "patch"
       })
         .then(resp => {
