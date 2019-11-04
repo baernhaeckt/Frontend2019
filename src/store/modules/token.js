@@ -18,7 +18,7 @@ const actions = {
   [TOKEN_PROCESS]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
       let promises = [];
-      let maxRetries = state.unprocessedTokens.length;
+      let maxRetries = state.unprocessedTokens.length + 1;
       let retries = 0;
       while (state.unprocessedTokens.length > 0 && retries < maxRetries) {
         let token = state.unprocessedTokens[0];

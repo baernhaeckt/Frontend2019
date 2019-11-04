@@ -121,7 +121,15 @@ export default {
 <style lang="scss">
 .baseline-box {
   .chart-outer-container {
+    position: relative;
+    padding-bottom: 50vh;
+    height: 0;
+    overflow: hidden;
+
     .chart-container {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 50vh;
       background: $white;
