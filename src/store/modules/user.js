@@ -25,8 +25,9 @@ const actions = {
         })
         .catch(err => {
           commit(USER_ERROR);
-          // if resp is unauthorized, logout, too
+          if (err.response.status === 401) {
           dispatch(AUTH_LOGOUT);
+          }
           reject();
         });
     });
@@ -45,9 +46,10 @@ const actions = {
         })
         .catch(err => {
           commit(USER_ERROR);
-          // if resp is unauthorized, logout, too
+          if (err.response.status === 401) {
           dispatch(AUTH_LOGOUT);
-          reject();
+          }
+          reject(err.response);
         });
     });
   }
