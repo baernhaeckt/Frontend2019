@@ -26,17 +26,17 @@ const actions = {
         .catch(err => {
           commit(USER_ERROR);
           if (err.response.status === 401) {
-          dispatch(AUTH_LOGOUT);
+            dispatch(AUTH_LOGOUT);
           }
           reject();
         });
     });
   },
-  [USER_UPDATE]: ({ commit, dispatch }, displayName, street, city, postalCode) => {
+  [USER_UPDATE]: ({ commit, dispatch }, profile) => {
     return new Promise((resolve, reject) => {
       apiCall({
         url: api_routes.user.update,
-        data: { displayName: displayName, street: street, city: city, postalCode: postalCode },
+        data: profile,
         method: "patch"
       })
         .then(resp => {
@@ -47,7 +47,7 @@ const actions = {
         .catch(err => {
           commit(USER_ERROR);
           if (err.response.status === 401) {
-          dispatch(AUTH_LOGOUT);
+            dispatch(AUTH_LOGOUT);
           }
           reject(err.response);
         });
