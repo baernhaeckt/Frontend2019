@@ -1,4 +1,4 @@
 export const settings = {
-  APP_NAME: "Familie Thunberg",
-  API_SERVER: "http://localhost:5000/"
+  APP_NAME: "Leaf",
+  API_SERVER: "https://baernhaeckt.azurewebsites.net/"
 };
