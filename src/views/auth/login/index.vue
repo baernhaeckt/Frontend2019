@@ -3,16 +3,33 @@
     <b-row class="justify-content-md-center vh-100 overflow-hidden">
       <b-col cols="12" md="auto" class="m-auto auth-page">
         <div class="text-white clearfix">
-          <div class="email-form auth-page-content" v-if="!needPassword && !isNewUser" key="emailform">
+          <div
+            class="email-form auth-page-content"
+            v-if="!needPassword && !isNewUser"
+            key="emailform"
+          >
             <div class="logo"></div>
             <h1>Identifikation</h1>
             <p>Bitte gib hier Deine E-Mail-Adresse an um fortzufahren</p>
             <b-form @submit.prevent="checkEmail">
               <b-input-group>
-                <b-form-input id="email" name="email" v-model="email" type="email" required placeholder="E-Mail" ref="emailInput" />
-                <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
-                  <b-spinner small v-if="isLoading" />
-                  Weiter
+                <b-form-input
+                  id="email"
+                  name="email"
+                  v-model="email"
+                  type="email"
+                  required
+                  placeholder="E-Mail"
+                  ref="emailInput"
+                />
+                <b-button
+                  slot="append"
+                  variant="success"
+                  type="submit"
+                  class="next-button"
+                  :disabled="isLoading"
+                >
+                  <b-spinner small v-if="isLoading" />Weiter
                 </b-button>
               </b-input-group>
             </b-form>
@@ -23,10 +40,23 @@
             <p>Bitte bestätige Deinen Account mit Deinem persönlichen Passwort.</p>
             <b-form @submit.prevent="login">
               <b-input-group>
-                <b-form-input id="password" name="password" v-model="password" type="password" required placeholder="Passwort" ref="passwordInput" />
-                <b-button slot="append" variant="success" type="submit" class="next-button" :disabled="isLoading">
-                  <b-spinner small v-if="isLoading" />
-                  Einloggen
+                <b-form-input
+                  id="password"
+                  name="password"
+                  v-model="password"
+                  type="password"
+                  required
+                  placeholder="Passwort"
+                  ref="passwordInput"
+                />
+                <b-button
+                  slot="append"
+                  variant="success"
+                  type="submit"
+                  class="next-button"
+                  :disabled="isLoading"
+                >
+                  <b-spinner small v-if="isLoading" />Einloggen
                 </b-button>
               </b-input-group>
             </b-form>
@@ -35,7 +65,11 @@
             <div class="logo"></div>
             <h1>Herzlich willkommen</h1>
             <p>Danke hast Du Dich angemeldet. Wir haben Dir eine Email gesendet, damit Du Dein Profil vervollständigen kannst.</p>
-            <b-button variant="success" class="float-right" @click="acceptNewUserScreen">Jetzt Loslegen</b-button>
+            <b-button
+              variant="success"
+              class="float-right"
+              @click="acceptNewUserScreen"
+            >Jetzt Loslegen</b-button>
           </div>
         </div>
       </b-col>
@@ -70,12 +104,19 @@ export default {
           this.isLoading = false
         })
         .catch(error => {
-          console.log(error)
-          this.needPassword = true
-          this.isLoading = false
-          this.$nextTick(() => {
-            this.$refs.passwordInput.$el.focus()
-          })
+          if (error.unauthorized) {
+            this.needPassword = true
+            this.isLoading = false
+            this.$nextTick(() => {
+              this.$refs.passwordInput.$el.focus()
+            })
+          } else {
+            this.isLoading = false
+            this.$snack.danger({
+              title: 'Es ist ein Fehler aufgetreten',
+              text: error.message
+            })
+          }
         })
     },
     login () {
@@ -89,22 +130,25 @@ export default {
         })
         .catch(error => {
           this.isLoading = false
+          this.needPassword = false
+          this.email = ''
+          this.password = ''
           this.$snack.danger({
             text: error.message
           })
         })
     },
     acceptNewUserScreen () {
-      this.$router.push('/')
+      this.$router.push('/profile')
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
 .auth-page {
   .auth-page-content {
