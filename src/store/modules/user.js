@@ -50,7 +50,7 @@ const actions = {
           if (err.unauthorized) {
             dispatch(AUTH_LOGOUT)
           }
-          reject(err.response)
+          reject(err)
         })
     })
   }

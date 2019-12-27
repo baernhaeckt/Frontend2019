@@ -3,6 +3,7 @@ export const handleError = err => {
     unauthorized: false,
     error: err,
     message: undefined,
+    errorFields: {},
     statusCode: undefined
   }
   if (err.response && err.response.status === 401) {
@@ -17,6 +18,7 @@ export const handleError = err => {
     error.message = err.response.data.title
     if (errors) {
       error.message += Object.keys(errors).map(key => errors[key].join(', '))
+      error.errorFields = errors
     }
   }
   if (err.response && err.response.status) {
