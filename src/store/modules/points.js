@@ -1,5 +1,5 @@
 import { POINTS_LIST } from '@/store/actions/points'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   points: [],
@@ -13,8 +13,9 @@ const actions = {
   [POINTS_LIST]: ({ commit, dispatch }, userId) => {
     return new Promise((resolve, reject) => {
       apiCall({
-        url: api_routes.points.list,
-        method: 'get'
+        url: ApiRoutes.points.list,
+        method: 'get',
+        dispatch: dispatch
       })
         .then(resp => {
           commit(POINTS_LIST, resp)

@@ -1,5 +1,5 @@
 import { TOKEN_STORE, TOKEN_PROCESS } from '../actions/token'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   unprocessedTokens: JSON.parse(localStorage.getItem('unprocessedTokens')) || []
@@ -28,9 +28,10 @@ const actions = {
         axioParams.append('tokenGuid', token)
         promises.push(
           apiCall({
-            url: api_routes.tokens.claim,
+            url: ApiRoutes.tokens.claim,
             params: axioParams,
-            method: 'post'
+            method: 'post',
+            dispatch: dispatch
           })
         )
         retries++
@@ -41,7 +42,7 @@ const actions = {
           resolve()
         })
         .catch(err => {
-          reject()
+          reject(err)
         })
     })
   }

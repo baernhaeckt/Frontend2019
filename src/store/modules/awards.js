@@ -1,5 +1,5 @@
 import { AWARDS_LIST } from '@/store/actions/awards'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   awards: [],
@@ -14,7 +14,7 @@ const getters = {
 const actions = {
   [AWARDS_LIST]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.awards.list_awards, method: 'get' })
+      apiCall({ url: ApiRoutes.awards.list_awards, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(AWARDS_LIST, resp)
           resolve(resp)

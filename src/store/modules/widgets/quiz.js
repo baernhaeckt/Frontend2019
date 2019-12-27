@@ -3,7 +3,7 @@ import {
   QUIZ_GET_QUESTION,
   QUIZ_ANSWER_QUESTION
 } from '@/store/actions/widgets/quiz'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   question: {
@@ -28,7 +28,7 @@ const getters = {
 const actions = {
   [QUIZ_GET_QUESTION]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.widgets.quiz.get_question, method: 'get' })
+      apiCall({ url: ApiRoutes.widgets.quiz.get_question, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(QUIZ_GET_QUESTION, resp)
           resolve(resp)
@@ -41,9 +41,10 @@ const actions = {
   [QUIZ_ANSWER_QUESTION]: ({ commit, dispatch }, answer) => {
     return new Promise((resolve, reject) => {
       apiCall({
-        url: api_routes.widgets.quiz.answer_question,
+        url: ApiRoutes.widgets.quiz.answer_question,
         data: answer,
-        method: 'post'
+        method: 'post',
+        dispatch: dispatch
       })
         .then(resp => {
           commit(QUIZ_ANSWER_QUESTION, resp)
@@ -58,7 +59,7 @@ const actions = {
 
 const mutations = {
   [QUIZ_GET_QUESTION]: (state, resp) => {
-    if (resp == null || resp == '') {
+    if (resp === null || resp === '') {
       state.question = {
         noMoreQuestions: true
       }

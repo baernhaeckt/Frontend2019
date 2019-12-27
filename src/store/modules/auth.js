@@ -8,7 +8,7 @@ import {
   AUTH_LOGOUT
 } from '@/store/actions/auth'
 import { USER_REQUEST } from '../actions/user'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 import router from './../../router'
 import axios from 'axios'
 
@@ -32,9 +32,10 @@ const actions = {
       axioParams.append('email', email)
 
       apiCall({
-        url: api_routes.user.check,
+        url: ApiRoutes.user.check,
         params: axioParams,
-        method: 'post'
+        method: 'post',
+        dispatch: dispatch
       })
         .then(resp => {
           if (resp.token && resp.token.length > 0) {
@@ -66,9 +67,10 @@ const actions = {
       axioParams.append('password', user.password)
 
       apiCall({
-        url: api_routes.user.login,
+        url: ApiRoutes.user.login,
         params: axioParams,
-        method: 'post'
+        method: 'post',
+        dispatch: dispatch
       })
         .then(resp => {
           localStorage.setItem('user-token', resp.token)
@@ -86,10 +88,15 @@ const actions = {
         })
     })
   },
-  [AUTH_SIGNUP]: ({ commit }, user) => {
+  [AUTH_SIGNUP]: ({ commit, dispatch }, user) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST)
-      apiCall({ url: api_routes.user.signup, data: user, method: 'post' })
+      apiCall({
+        url: ApiRoutes.user.signup,
+        data: user,
+        method: 'post',
+        dispatch: dispatch
+      })
         .then(resp => {
           resolve(resp)
         })

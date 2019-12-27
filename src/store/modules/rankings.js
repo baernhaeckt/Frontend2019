@@ -6,7 +6,7 @@ import {
   RANKINGS_LIST_GENERIC,
   RANKINGS_SUMMARY
 } from '@/store/actions/rankings'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   rankings: {
@@ -59,25 +59,19 @@ const actions = {
   },
   [RANKINGS_LIST_GENERIC]: ({ commit, dispatch }, identifier) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.rankings['list_' + identifier], method: 'get' })
+      apiCall({ url: ApiRoutes.rankings['list_' + identifier], method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(RANKINGS_LIST_GENERIC, [identifier, resp])
           resolve(resp)
         })
         .catch(err => {
-          if (err.response && err.response.data && err.response.data.title) {
-            var errors = err.response.data.errors
-            var message = `${err.response.data.title}: ${Object.keys(errors).map(key => errors[key].join(', '))}`
-            reject(message)
-          } else {
-            reject(err)
-          }
+          reject(err)
         })
     })
   },
   [RANKINGS_SUMMARY]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.rankings.summary, method: 'get' })
+      apiCall({ url: ApiRoutes.rankings.summary, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(RANKINGS_SUMMARY, resp)
           resolve(resp)

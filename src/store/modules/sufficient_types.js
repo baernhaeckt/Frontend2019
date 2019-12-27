@@ -3,7 +3,7 @@ import {
   LIST_SUFFICIENTS_BASELINE,
   LIST_SUFFICIENTS_PERSONAL
 } from '@/store/actions/sufficient_types'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   baseline: [],
@@ -22,7 +22,7 @@ const getters = {
 const actions = {
   [LIST_SUFFICIENTS_BASELINE]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.sufficient_types.list_baseline, method: 'get' })
+      apiCall({ url: ApiRoutes.sufficient_types.list_baseline, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(LIST_SUFFICIENTS_BASELINE, resp)
           resolve(resp)
@@ -34,7 +34,7 @@ const actions = {
   },
   [LIST_SUFFICIENTS_PERSONAL]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.sufficient_types.list_personal, method: 'get' })
+      apiCall({ url: ApiRoutes.sufficient_types.list_personal, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(LIST_SUFFICIENTS_PERSONAL, resp)
           resolve(resp)

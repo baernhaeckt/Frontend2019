@@ -3,7 +3,7 @@ import {
   FRIENDS_ADD,
   FRIENDS_REMOVE
 } from '@/store/actions/friends'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 
 const state = {
   friends: [],
@@ -17,7 +17,7 @@ const getters = {
 const actions = {
   [FRIENDS_LIST]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      apiCall({ url: api_routes.friends.list, method: 'get' })
+      apiCall({ url: ApiRoutes.friends.list, method: 'get', dispatch: dispatch })
         .then(resp => {
           commit(FRIENDS_LIST, resp)
           resolve(resp)
@@ -33,9 +33,10 @@ const actions = {
       axioParams.append('friendEmail', email)
 
       apiCall({
-        url: api_routes.friends.add,
+        url: ApiRoutes.friends.add,
         params: axioParams,
-        method: 'post'
+        method: 'post',
+        dispatch: dispatch
       })
         .then(resp => {
           dispatch(FRIENDS_LIST)
@@ -52,9 +53,10 @@ const actions = {
       axioParams.append('friendUserId', userId)
 
       apiCall({
-        url: api_routes.friends.remove,
+        url: ApiRoutes.friends.remove,
         params: axioParams,
-        method: 'delete'
+        method: 'delete',
+        dispatch: dispatch
       })
         .then(resp => {
           dispatch(FRIENDS_LIST)

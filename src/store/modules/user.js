@@ -4,7 +4,7 @@ import {
   USER_ERROR,
   USER_SUCCESS
 } from '../actions/user'
-import { apiCall, api_routes } from '@/utils/api'
+import { apiCall, ApiRoutes } from '@/utils/api'
 import { AUTH_LOGOUT } from '../actions/auth'
 
 const state = { status: '', profile: {} }
@@ -18,26 +18,27 @@ const actions = {
   [USER_REQUEST]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
       commit(USER_REQUEST)
-      apiCall({ url: api_routes.user.me })
+      apiCall({ url: ApiRoutes.user.me, dispatch: dispatch })
         .then(resp => {
           commit(USER_SUCCESS, resp)
           resolve()
         })
         .catch(err => {
           commit(USER_ERROR)
-          if (err.response.status === 401) {
+          if (err.unauthorized) {
             dispatch(AUTH_LOGOUT)
           }
-          reject()
+          reject(err)
         })
     })
   },
   [USER_UPDATE]: ({ commit, dispatch }, profile) => {
     return new Promise((resolve, reject) => {
       apiCall({
-        url: api_routes.user.update,
+        url: ApiRoutes.user.update,
         data: profile,
-        method: 'patch'
+        method: 'patch',
+        dispatch: dispatch
       })
         .then(resp => {
           dispatch(USER_REQUEST).then(() => {
@@ -46,7 +47,7 @@ const actions = {
         })
         .catch(err => {
           commit(USER_ERROR)
-          if (err.response.status === 401) {
+          if (err.unauthorized) {
             dispatch(AUTH_LOGOUT)
           }
           reject(err.response)
