@@ -12,7 +12,7 @@
             <b-button variant="success" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
         </b-button-group>
 
-        <b-table striped hover :items="data" :fields="tableFields" v-if="isLoaded && !error" />
+        <b-table striped hover :items="rankingTableData" :fields="tableFields" v-if="isLoaded && !error" />
         <div class="alert alert-danger" v-if="error">
           Leider ist ein Fehler aufgetreten:<br />{{ error }}
         </div>
@@ -44,14 +44,17 @@ export default {
   computed: {
     ...mapGetters(['getLocal', 'getGlobal', 'getFriends']),
     data () {
-      if (this.currentMode === 'local') {
-        return this.getLocal
+      return {
       }
-      if (this.currentMode === 'global') {
-        return this.getGlobal
-      }
-      if (this.currentMode === 'friends') {
-        return this.getFriends
+    },
+    rankingTableData () {
+      switch (this.currentMode) {
+        case 'local':
+          return this.getLocal
+        case 'friends':
+          return this.getFriends
+        default:
+          return this.getGlobal
       }
     }
   },
@@ -79,7 +82,7 @@ export default {
         })
         .catch(error => {
           this.isLoaded = true
-          this.error = error
+          this.error = error.message
         })
     }
   }
