@@ -5,10 +5,10 @@ import user from './modules/user'
 import friends from './modules/friends'
 import rankings from './modules/rankings'
 import awards from './modules/awards'
-import sufficient_types from './modules/sufficient_types'
+import sufficientTypes from './modules/sufficient_types'
 import token from './modules/token'
 import points from './modules/points'
-import widget_quiz from './modules/widgets/quiz'
+import widgetQuiz from './modules/widgets/quiz'
 import settings from './modules/settings'
 Vue.use(Vuex)
 
@@ -21,10 +21,10 @@ export default new Vuex.Store({
     friends,
     rankings,
     awards,
-    sufficient_types,
+    sufficient_types: sufficientTypes,
     token,
     points,
-    widget_quiz,
+    widget_quiz: widgetQuiz,
     settings
   },
   strict: debug

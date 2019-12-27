@@ -6,7 +6,6 @@
 
 <script>
 import { TOKEN_PROCESS } from '@/store/actions/token'
-import { mapState } from 'vuex'
 
 export default {
   mounted () {

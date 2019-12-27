@@ -17,9 +17,7 @@
 
 <script>
 import {
-  FRIENDS_LIST,
-  FRIENDS_ADD,
-  FRIENDS_REMOVE
+  FRIENDS_LIST
 } from '@/store/actions/friends'
 import { mapGetters } from 'vuex'
 import gmapsInit from '@/utils/map'
@@ -29,8 +27,8 @@ export default {
   async mounted () {
     this.isLoading = true
     try {
-      const google = await gmapsInit()
-      const geocoder = new google.maps.Geocoder()
+      this.google = await gmapsInit()
+      // const geocoder = new google.maps.Geocoder()
 
       var mapOptions = {
         zoom: 12,
@@ -186,7 +184,7 @@ export default {
         ]
       }
 
-      this.map = new google.maps.Map(this.$refs.mapscontainer, mapOptions)
+      this.map = new this.google.maps.Map(this.$refs.mapscontainer, mapOptions)
     } catch (error) {
       this.$snack.danger({
         text: error
@@ -194,12 +192,12 @@ export default {
     }
 
     this.$store.dispatch(FRIENDS_LIST).then(() => {
-      var infoWindow = new google.maps.InfoWindow({
+      var infoWindow = new this.google.maps.InfoWindow({
         content: null,
         maxHeight: 250
       })
       this.allFriends.forEach(friend => {
-        var marker = new google.maps.Marker({
+        var marker = new this.google.maps.Marker({
           position: {
             lat: friend.location.latitude,
             lng: friend.location.longitude
@@ -222,7 +220,7 @@ export default {
         var self = this
         window.addEventListener('resize', () => {
           var currCenter = self.map.getCenter()
-          google.maps.event.trigger(self.map, 'resize')
+          this.google.maps.event.trigger(self.map, 'resize')
           self.map.setCenter(currCenter)
         })
       })
@@ -233,7 +231,8 @@ export default {
       map: undefined,
       isLoading: false,
       showInfoWindowContent: false,
-      infoWindowUser: null
+      infoWindowUser: null,
+      google: undefined
     }
   },
   computed: {

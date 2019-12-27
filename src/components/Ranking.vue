@@ -35,7 +35,6 @@
 
 <script>
 import { RANKINGS_SUMMARY } from '@/store/actions/rankings.js'
-import BlockBox from './BlockBox'
 import { mapGetters } from 'vuex'
 
 export default {

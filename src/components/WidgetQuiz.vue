@@ -96,6 +96,7 @@ export default {
           this.answerChecked = true
         })
         .catch(err => {
+          if (err) {}
           this.isAnswerCheckLoading = false
           this.answerCheckError = true
         })
