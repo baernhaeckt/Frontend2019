@@ -44,63 +44,68 @@
 </template>
 
 <script>
-import { AUTH_REQUEST, AUTH_CHECK } from "@/store/actions/auth";
+import { AUTH_REQUEST, AUTH_CHECK } from '@/store/actions/auth'
 
 export default {
-  name: "Login",
-  mounted() {
-    this.$refs.emailInput.$el.focus();
+  name: 'Login',
+  mounted () {
+    this.$refs.emailInput.$el.focus()
   },
-  data() {
+  data () {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       needPassword: false,
       isNewUser: false,
       isLoading: false
-    };
+    }
   },
   methods: {
-    checkEmail() {
-      this.isLoading = true;
+    checkEmail () {
+      this.isLoading = true
       this.$store
         .dispatch(AUTH_CHECK, this.email)
         .then(() => {
-          this.isNewUser = true;
-          this.isLoading = false;
+          this.isNewUser = true
+          this.isLoading = false
         })
         .catch(error => {
-          this.needPassword = true;
-          this.isLoading = false;
+          console.log(error)
+          this.needPassword = true
+          this.isLoading = false
           this.$nextTick(() => {
-            this.$refs.passwordInput.$el.focus();
-          });
-        });
+            this.$refs.passwordInput.$el.focus()
+          })
+        })
     },
-    login() {
-      this.isLoading = true;
-      const { email, password } = this;
+    login () {
+      this.isLoading = true
+      const { email, password } = this
       this.$store
         .dispatch(AUTH_REQUEST, { email, password })
         .then(() => {
-          this.isLoading = false;
-          this.$router.push("/");
+          this.isLoading = false
+          this.$router.push('/')
         })
         .catch(error => {
-          this.isLoading = false;
+          this.isLoading = false
           this.$snack.danger({
             text: error.message
-          });
-        });
+          })
+        })
     },
-    acceptNewUserScreen() {
-      this.$router.push("/");
+    acceptNewUserScreen () {
+      this.$router.push('/')
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
 .auth-page {
   .auth-page-content {
     max-width: 50vw;

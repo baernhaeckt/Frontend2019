@@ -28,34 +28,38 @@
 </template>
 
 <script>
-import { AUTH_LOGOUT } from "@/store/actions/auth.js";
-import { USER_REQUEST } from "@/store/actions/user.js";
-import { mapGetters } from "vuex";
+import { AUTH_LOGOUT } from '@/store/actions/auth.js'
+import { USER_REQUEST } from '@/store/actions/user.js'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: "Navbar",
-  mounted() {
-    this.$store.dispatch(USER_REQUEST);
+  name: 'Navbar',
+  mounted () {
+    this.$store.dispatch(USER_REQUEST)
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {
-    ...mapGetters(["getProfile"]),
-    userNameOrEmail() {
-      let profile = this.getProfile;
-      return profile.displayName || profile.email;
+    ...mapGetters(['getProfile']),
+    userNameOrEmail () {
+      let profile = this.getProfile
+      return profile.displayName || profile.email
     }
   },
   methods: {
-    logout: function() {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push("/login"));
+    logout: function () {
+      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/login'))
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
 .navbar {
   background-image: url("/assets/cardboard_background.jpg");
   background-repeat: repeat-x;

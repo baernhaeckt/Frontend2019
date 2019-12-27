@@ -15,42 +15,42 @@
 </template>
 
 <script>
-import { AWARDS_LIST } from "@/store/actions/awards";
-import { mapGetters } from "vuex";
+import { AWARDS_LIST } from '@/store/actions/awards'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: "UserBadges",
-  mounted() {
-    this.isLoading = true;
+  name: 'UserBadges',
+  mounted () {
+    this.isLoading = true
     this.$store
       .dispatch(AWARDS_LIST)
       .then(() => {
-        this.isLoading = false;
+        this.isLoading = false
       })
       .catch(() => {
-        this.isLoading = false;
-      });
+        this.isLoading = false
+      })
   },
-  data() {
+  data () {
     return {
       isLoading: false,
       iconMap: {
-        OnboardingAward: "door-open",
-        TrashHeroAward: "trash-alt"
+        OnboardingAward: 'door-open',
+        TrashHeroAward: 'trash-alt'
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters(["allAwards"])
+    ...mapGetters(['allAwards'])
   },
   watch: {},
   methods: {
-    getIconForAwardKind(awardKind) {
-      return this.iconMap[awardKind];
+    getIconForAwardKind (awardKind) {
+      return this.iconMap[awardKind]
     }
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss">

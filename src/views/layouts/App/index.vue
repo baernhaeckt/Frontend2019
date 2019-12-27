@@ -18,56 +18,56 @@
 </template>
 
 <script>
-import Navbar from "./../Modules/Navigation";
-import Ranking from "./../../../components/Ranking";
-import UserBadges from "./../../../components/UserBadges";
-import WidgetQuiz from "./../../../components/WidgetQuiz";
+import Navbar from './../Modules/Navigation'
+import Ranking from './../../../components/Ranking'
+import UserBadges from './../../../components/UserBadges'
+import WidgetQuiz from './../../../components/WidgetQuiz'
 
 export default {
-  name: "App",
-  mounted() {
+  name: 'App',
+  mounted () {
     let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
-      "navbar-toggler"
-    );
+      'navbar-toggler'
+    )
     let visibility =
       toggler !== undefined
-        ? window.getComputedStyle(toggler[0], null).getPropertyValue("display")
-        : "none";
-    if (visibility !== "none") {
-      if (this.$route.name === "home") {
-        this.sidebarVisible = true;
-        this.sidebarToggleable = false;
+        ? window.getComputedStyle(toggler[0], null).getPropertyValue('display')
+        : 'none'
+    if (visibility !== 'none') {
+      if (this.$route.name === 'home') {
+        this.sidebarVisible = true
+        this.sidebarToggleable = false
       } else {
-        this.sidebarVisible = false;
-        this.sidebarToggleable = true;
+        this.sidebarVisible = false
+        this.sidebarToggleable = true
       }
     }
   },
-  data() {
+  data () {
     return {
       sidebarVisible: true,
       sidebarToggleable: false
-    };
+    }
   },
   methods: {},
   watch: {
-    $route(to, from) {
+    $route (to, from) {
       let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
-        "navbar-toggler"
-      );
+        'navbar-toggler'
+      )
       let visibility =
         toggler !== undefined
           ? window
-              .getComputedStyle(toggler[0], null)
-              .getPropertyValue("display")
-          : "none";
-      if (visibility !== "none") {
-        if (from.name === "home") {
-          this.sidebarVisible = false;
-          this.sidebarToggleable = true;
-        } else if (to.name === "home") {
-          this.sidebarVisible = true;
-          this.sidebarToggleable = false;
+            .getComputedStyle(toggler[0], null)
+            .getPropertyValue('display')
+          : 'none'
+      if (visibility !== 'none') {
+        if (from.name === 'home') {
+          this.sidebarVisible = false
+          this.sidebarToggleable = true
+        } else if (to.name === 'home') {
+          this.sidebarVisible = true
+          this.sidebarToggleable = false
         }
       }
     }
@@ -78,7 +78,7 @@ export default {
     UserBadges,
     WidgetQuiz
   }
-};
+}
 </script>
 
 <style lang="scss">

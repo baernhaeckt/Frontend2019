@@ -12,67 +12,78 @@
             <b-button variant="success" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
         </b-button-group>
 
-        <b-table striped hover :items="data" :fields="tableFields" v-if="isLoaded" />
+        <b-table striped hover :items="data" :fields="tableFields" v-if="isLoaded && !error" />
+        <div class="alert alert-danger" v-if="error">
+          Leider ist ein Fehler aufgetreten:<br />{{ error }}
+        </div>
       </template>
     </block-box>
   </div>
 </template>
 
 <script>
-import { RANKINGS_LIST_GENERIC } from "@/store/actions/rankings";
-import { mapGetters } from "vuex";
+import { RANKINGS_LIST_GENERIC } from '@/store/actions/rankings'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: "Rankings",
-  mounted() {
-    this.loadSelected();
+  name: 'Rankings',
+  mounted () {
+    this.loadSelected()
   },
-  data() {
+  data () {
     return {
-      currentMode: "global",
+      currentMode: 'global',
       isLoaded: false,
       tableFields: [
-        { key: "displayName", sortable: false, label: "Ökoheld" },
-        { key: "points", sortable: false, label: "Punkte" }
-      ]
-    };
+        { key: 'displayName', sortable: false, label: 'Ökoheld' },
+        { key: 'points', sortable: false, label: 'Punkte' }
+      ],
+      error: undefined
+    }
   },
   computed: {
-    ...mapGetters(["getLocal", "getGlobal", "getFriends"]),
-    data() {
-      if (this.currentMode === "local") {
-        return this.getLocal;
+    ...mapGetters(['getLocal', 'getGlobal', 'getFriends']),
+    data () {
+      if (this.currentMode === 'local') {
+        return this.getLocal
       }
-      if (this.currentMode === "global") {
-        return this.getGlobal;
+      if (this.currentMode === 'global') {
+        return this.getGlobal
       }
-      if (this.currentMode === "friends") {
-        return this.getFriends;
+      if (this.currentMode === 'friends') {
+        return this.getFriends
       }
     }
   },
   watch: {},
   methods: {
-    setModeToLocal() {
-      this.currentMode = "local";
-      this.loadSelected();
+    setModeToLocal () {
+      this.currentMode = 'local'
+      this.loadSelected()
     },
-    setModeToGlobal() {
-      this.currentMode = "global";
-      this.loadSelected();
+    setModeToGlobal () {
+      this.currentMode = 'global'
+      this.loadSelected()
     },
-    setModeToFriends() {
-      this.currentMode = "friends";
-      this.loadSelected();
+    setModeToFriends () {
+      this.currentMode = 'friends'
+      this.loadSelected()
     },
-    loadSelected() {
-      this.isLoaded = false;
-      this.$store.dispatch(RANKINGS_LIST_GENERIC, this.currentMode).then(() => {
-        this.isLoaded = true;
-      });
+    loadSelected () {
+      this.isLoaded = false
+      this.error = undefined
+      this.$store
+        .dispatch(RANKINGS_LIST_GENERIC, this.currentMode)
+        .then(() => {
+          this.isLoaded = true
+        })
+        .catch(error => {
+          this.isLoaded = true
+          this.error = error
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

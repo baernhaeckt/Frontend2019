@@ -1,1 +1,1 @@
-export const AWARDS_LIST = "AWARDS_LIST";
+export const AWARDS_LIST = 'AWARDS_LIST'

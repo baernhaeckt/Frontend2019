@@ -1,92 +1,92 @@
-import Vue from "vue";
-import Router from "vue-router";
-import store from "../store";
-import Login from "@/views/auth/login";
-import App from "@/views/layouts/App";
-import Home from "@/views/home";
-import History from "@/views/history";
-import Rankings from "@/views/rankings";
-import Profile from "@/views/profile";
-import Token from "@/views/token";
-import Friends from "@/views/friends";
-import Statistics from "@/views/statistics";
+import Vue from 'vue'
+import Router from 'vue-router'
+import store from '../store'
+import Login from '@/views/auth/login'
+import App from '@/views/layouts/App'
+import Home from '@/views/home'
+import History from '@/views/history'
+import Rankings from '@/views/rankings'
+import Profile from '@/views/profile'
+import Token from '@/views/token'
+import Friends from '@/views/friends'
+import Statistics from '@/views/statistics'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
-    next();
-    return;
+    next()
+    return
   }
-  next("/");
-};
+  next('/')
+}
 
 const ifAuthenticated = (to, from, next) => {
   if (store.getters.isAuthenticated) {
-    next();
-    return;
+    next()
+    return
   }
-  next("/login");
-};
+  next('/login')
+}
 
 export default new Router({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/token/:token",
-      name: "token",
+      path: '/token/:token',
+      name: 'token',
       component: Token
     },
     {
-      path: "/",
-      name: "app",
+      path: '/',
+      name: 'app',
       component: App,
       beforeEnter: ifAuthenticated,
       children: [
         {
-          path: "/",
-          name: "home",
+          path: '/',
+          name: 'home',
           beforeEnter: ifAuthenticated,
           component: Home
         },
         {
-          path: "/profile",
-          name: "profile",
+          path: '/profile',
+          name: 'profile',
           beforeEnter: ifAuthenticated,
           component: Profile
         },
         {
-          path: "/friends",
-          name: "friends",
+          path: '/friends',
+          name: 'friends',
           beforeEnter: ifAuthenticated,
           component: Friends
         },
         {
-          path: "/history",
-          name: "history",
+          path: '/history',
+          name: 'history',
           beforeEnter: ifAuthenticated,
           component: History
         },
         {
-          path: "/rankings",
-          name: "rankings",
+          path: '/rankings',
+          name: 'rankings',
           beforeEnter: ifAuthenticated,
           component: Rankings
         },
         {
-          path: "/statistics",
-          name: "statistics",
+          path: '/statistics',
+          name: 'statistics',
           beforeEnter: ifAuthenticated,
           component: Statistics
         }
       ]
     },
     {
-      path: "/login",
-      name: "login",
+      path: '/login',
+      name: 'login',
       component: Login,
       beforeEnter: ifNotAuthenticated
     }
   ]
-});
+})

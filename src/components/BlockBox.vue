@@ -6,15 +6,15 @@
 
 <script>
 export default {
-  name: "BlockBox",
-  mounted() {},
-  data() {
-    return {};
+  name: 'BlockBox',
+  mounted () {},
+  data () {
+    return {}
   },
   computed: {},
   watch: {},
   methods: {}
-};
+}
 </script>
 
 <style lang="scss">

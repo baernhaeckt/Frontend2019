@@ -3,77 +3,77 @@ import {
   USER_UPDATE,
   USER_ERROR,
   USER_SUCCESS
-} from "../actions/user";
-import { apiCall, api_routes } from "@/utils/api";
-import { AUTH_LOGOUT } from "../actions/auth";
+} from '../actions/user'
+import { apiCall, api_routes } from '@/utils/api'
+import { AUTH_LOGOUT } from '../actions/auth'
 
-const state = { status: "", profile: {} };
+const state = { status: '', profile: {} }
 
 const getters = {
   getProfile: state => state.profile,
   isProfileLoaded: state => !!state.profile.displayName
-};
+}
 
 const actions = {
   [USER_REQUEST]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      commit(USER_REQUEST);
+      commit(USER_REQUEST)
       apiCall({ url: api_routes.user.me })
         .then(resp => {
-          commit(USER_SUCCESS, resp);
-          resolve();
+          commit(USER_SUCCESS, resp)
+          resolve()
         })
         .catch(err => {
-          commit(USER_ERROR);
+          commit(USER_ERROR)
           if (err.response.status === 401) {
-            dispatch(AUTH_LOGOUT);
+            dispatch(AUTH_LOGOUT)
           }
-          reject();
-        });
-    });
+          reject()
+        })
+    })
   },
   [USER_UPDATE]: ({ commit, dispatch }, profile) => {
     return new Promise((resolve, reject) => {
       apiCall({
         url: api_routes.user.update,
         data: profile,
-        method: "patch"
+        method: 'patch'
       })
         .then(resp => {
           dispatch(USER_REQUEST).then(() => {
-            resolve();
-          });
+            resolve()
+          })
         })
         .catch(err => {
-          commit(USER_ERROR);
+          commit(USER_ERROR)
           if (err.response.status === 401) {
-            dispatch(AUTH_LOGOUT);
+            dispatch(AUTH_LOGOUT)
           }
-          reject(err.response);
-        });
-    });
+          reject(err.response)
+        })
+    })
   }
-};
+}
 
 const mutations = {
   [USER_REQUEST]: state => {
-    state.status = "loading";
+    state.status = 'loading'
   },
   [USER_SUCCESS]: (state, resp) => {
-    state.status = "success";
-    state.profile = resp;
+    state.status = 'success'
+    state.profile = resp
   },
   [USER_ERROR]: state => {
-    state.status = "error";
+    state.status = 'error'
   },
   [AUTH_LOGOUT]: state => {
-    state.profile = {};
+    state.profile = {}
   }
-};
+}
 
 export default {
   state,
   getters,
   actions,
   mutations
-};
+}

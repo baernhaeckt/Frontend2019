@@ -12,25 +12,25 @@
 </template>
 
 <script>
-import { settings } from "@/settings";
+import { settings } from '@/settings'
 
 export default {
-  name: "Statistics",
-  mounted() {},
-  data() {
+  name: 'Statistics',
+  mounted () {},
+  data () {
     return {
       isLoading: true
-    };
+    }
   },
   computed: {
-    forecastImageUrl() {
-      console.log(settings);
-      return settings.FORECAST_URL;
+    forecastImageUrl () {
+      console.log(settings)
+      return settings.FORECAST_URL
     }
   },
   watch: {},
   methods: {}
-};
+}
 </script>
 
 <style lang="scss">
