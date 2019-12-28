@@ -9,7 +9,7 @@ import Rankings from '@/views/rankings'
 import Profile from '@/views/profile'
 import Token from '@/views/token'
 import Friends from '@/views/friends'
-import Statistics from '@/views/statistics'
+// import Statistics from '@/views/statistics'
 
 Vue.use(Router)
 
@@ -73,13 +73,13 @@ export default new Router({
           name: 'rankings',
           beforeEnter: ifAuthenticated,
           component: Rankings
-        },
+        }/* ,
         {
           path: '/statistics',
           name: 'statistics',
           beforeEnter: ifAuthenticated,
           component: Statistics
-        }
+        } */
       ]
     },
     {

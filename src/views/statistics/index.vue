@@ -16,7 +16,10 @@ import { settings } from '@/settings'
 
 export default {
   name: 'Statistics',
-  mounted () {},
+  mounted () {
+    // Redirect to home, as statistics are not yet enabled
+    this.$router.push('/')
+  },
   data () {
     return {
       isLoading: true
