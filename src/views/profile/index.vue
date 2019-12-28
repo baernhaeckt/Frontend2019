@@ -1,11 +1,11 @@
 <template>
   <div class="profile-page">
-    <block-box>
+    <block-box class="position-relative">
       <h1>Vervollständige jetzt Dein Profil</h1>
-      <b-form @submit.prevent="storeProfile" class="position-relative">
-        <div v-if="loading" class="loader centered-spinner">
-          <b-spinner class="large-spinner text-success" />
-        </div>
+      <div v-if="loading" class="loader centered-spinner">
+        <b-spinner class="large-spinner text-success" />
+      </div>
+      <b-form @submit.prevent="storeProfile">
         <b-form-group label="E-Mail Adresse (privat)">
           <b-input id="email" name="email" v-model="updatedProfile.email" placeholder="E-Mail" :state="validationState.email" readonly />
           <b-form-invalid-feedback id="input-live-feedback">
