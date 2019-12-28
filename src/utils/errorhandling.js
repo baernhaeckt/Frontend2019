@@ -20,6 +20,8 @@ export const handleError = err => {
       error.message += Object.keys(errors).map(key => errors[key].join(', '))
       error.errorFields = errors
     }
+  } else if (err.response && err.response.data && err.response.data.error) {
+    error.message = err.response.data.error
   }
   if (err.response && err.response.status) {
     error.statusCode = err.response.status
