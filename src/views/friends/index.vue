@@ -91,9 +91,18 @@ export default {
           this.friendEmailModel = null
           this.friendAdded = true
         })
-        .catch(() => {
-          this.friendAddedError = true
-          this.isFriendAddLoading = false
+        .catch(err => {
+          if (!err.unauthorized) {
+            this.friendAddedError = true
+            this.isFriendAddLoading = false
+
+            this.$bvToast.toast(err.message, {
+              title: 'Fehler beim hinzufügen des Freundes',
+              variant: 'danger',
+              solid: true,
+              autoHideDelay: 5000
+            })
+          }
         })
     },
     removeFriend (friendId) {
