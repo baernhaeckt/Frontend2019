@@ -11,8 +11,8 @@
         </b-table>
         <div v-else class="no-points">
           <font-awesome-icon :icon="['far', 'frown-open']" class="sad-user" />
-          <div class="no-friends-text">
-            Du hast leider noch keine Punkte auf <img src="/assets/logo.svg" width="70" class="leaf-logo" />. Füge doch jetzt jemand hinzu!
+          <div class="no-points-text">
+            Du hast leider noch keine Punkte auf <img src="/assets/logo.svg" width="70" class="leaf-logo" />. Beantworte doch jetzt ein Quiz um Deine ersten Punkte zu verdienen!
           </div>
         </div>
       </template>
@@ -60,6 +60,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
 .history-page {
   .loader {
     margin: 50px 0;
@@ -72,6 +76,28 @@ export default {
 
   .table {
     min-width: 700px;
+  }
+
+  .no-points {
+    text-align: center;
+    margin: 50px 0;
+
+    .sad-user {
+      color: $warning;
+      font-size: 4rem;
+    }
+
+    .no-points-text {
+      margin-top: 20px;
+
+      .leaf-logo {
+        width: 60px;
+        height: 18px;
+        object-fit: cover;
+        object-position: left;
+        margin-top: -4px;
+      }
+    }
   }
 }
 </style>
