@@ -133,12 +133,14 @@ export default {
           this.updateValidation(err.errorFields)
         }
 
-        this.$bvToast.toast('Beim speichern ist ein Fehler aufgetreten, bitte überprüfe die Meldungen bei den Eingabefeldern.', {
-          title: 'Fehler beim speichern des Profils',
-          variant: 'danger',
-          solid: true,
-          autoHideDelay: 5000
-        })
+        if (!err.unauthorized) {
+          this.$bvToast.toast('Beim speichern ist ein Fehler aufgetreten, bitte überprüfe die Meldungen bei den Eingabefeldern.', {
+            title: 'Fehler beim speichern des Profils',
+            variant: 'danger',
+            solid: true,
+            autoHideDelay: 5000
+          })
+        }
       })
     }
   }
