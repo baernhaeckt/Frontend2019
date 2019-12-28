@@ -29,12 +29,9 @@ const actions = {
   },
   [FRIENDS_ADD]: ({ commit, dispatch }, email) => {
     return new Promise((resolve, reject) => {
-      let axioParams = new URLSearchParams()
-      axioParams.append('friendEmail', email)
-
       apiCall({
         url: ApiRoutes.friends.add,
-        params: axioParams,
+        data: { email: email },
         method: 'post',
         dispatch: dispatch
       })
@@ -49,12 +46,9 @@ const actions = {
   },
   [FRIENDS_REMOVE]: ({ commit, dispatch }, userId) => {
     return new Promise((resolve, reject) => {
-      let axioParams = new URLSearchParams()
-      axioParams.append('friendUserId', userId)
-
       apiCall({
         url: ApiRoutes.friends.remove,
-        params: axioParams,
+        data: { friendUserId: userId },
         method: 'delete',
         dispatch: dispatch
       })

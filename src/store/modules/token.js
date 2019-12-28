@@ -24,12 +24,10 @@ const actions = {
         let token = state.unprocessedTokens[0]
         commit('TOKEN_REMOVE', token)
         commit('TOKEN_UPDATELOCALSTORAGE')
-        let axioParams = new URLSearchParams()
-        axioParams.append('tokenGuid', token)
         promises.push(
           apiCall({
             url: ApiRoutes.tokens.claim,
-            params: axioParams,
+            data: { tokenGuid: token },
             method: 'post',
             dispatch: dispatch
           })
