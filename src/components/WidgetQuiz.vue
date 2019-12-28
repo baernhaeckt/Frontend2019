@@ -64,8 +64,8 @@ export default {
       return this.getQuestion.answers != null
         ? this.getQuestion.answers.map(answer => {
           return {
-            text: answer,
-            value: answer
+            text: answer.Value,
+            value: answer.Key
           }
         })
         : []
@@ -87,7 +87,7 @@ export default {
       this.answerCheckError = false
       let answer = {
         questionId: this.getQuestion.questionId,
-        answers: [this.selectedAnswer]
+        answerID: this.selectedAnswer
       }
       this.$store
         .dispatch(QUIZ_ANSWER_QUESTION, answer)
