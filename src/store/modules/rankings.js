@@ -54,8 +54,19 @@ const actions = {
   [RANKINGS_LIST_FRIENDS]: ({ commit, dispatch }) => {
     dispatch([RANKINGS_LIST_GENERIC], 'friends')
   },
-  [RANKINGS_LIST_LOCAL]: ({ commit, dispatch }) => {
-    dispatch([RANKINGS_LIST_GENERIC], 'local')
+  [RANKINGS_LIST_LOCAL]: ({ commit, dispatch }, zip) => {
+    return new Promise((resolve, reject) => {
+      let axioParams = new URLSearchParams()
+      axioParams.append('zip', zip)
+      apiCall({ url: ApiRoutes.rankings['list_local'], method: 'get', params: axioParams, dispatch: dispatch })
+        .then(resp => {
+          commit(RANKINGS_LIST_GENERIC, ['local', resp])
+          resolve(resp)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
   },
   [RANKINGS_LIST_GENERIC]: ({ commit, dispatch }, identifier) => {
     return new Promise((resolve, reject) => {

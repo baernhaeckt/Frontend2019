@@ -11,7 +11,6 @@
             <b-button variant="success" @click="setModeToLocal" :disabled="currentMode === 'local'">Local</b-button>
             <b-button variant="success" @click="setModeToFriends" :disabled="currentMode === 'friends'">Friends</b-button>
         </b-button-group>
-
         <b-table striped hover :items="rankingTableData" :fields="tableFields" v-if="isLoaded && !error" />
         <div class="alert alert-danger" v-if="error">
           Leider ist ein Fehler aufgetreten:<br />{{ error }}
@@ -22,7 +21,7 @@
 </template>
 
 <script>
-import { RANKINGS_LIST_GENERIC } from '@/store/actions/rankings'
+import { RANKINGS_LIST_GENERIC, RANKINGS_LIST_LOCAL } from '@/store/actions/rankings'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -42,11 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getLocal', 'getGlobal', 'getFriends']),
-    data () {
-      return {
-      }
-    },
+    ...mapGetters(['getLocal', 'getGlobal', 'getFriends', 'getProfile']),
     rankingTableData () {
       switch (this.currentMode) {
         case 'local':
@@ -56,6 +51,9 @@ export default {
         default:
           return this.getGlobal
       }
+    },
+    memberZip () {
+      return this.getProfile.postalCode
     }
   },
   watch: {},
@@ -75,8 +73,10 @@ export default {
     loadSelected () {
       this.isLoaded = false
       this.error = undefined
+      var action = this.currentMode === 'local' ? RANKINGS_LIST_LOCAL : RANKINGS_LIST_GENERIC
+      var parameter = this.currentMode === 'local' ? this.memberZip : this.currentMode
       this.$store
-        .dispatch(RANKINGS_LIST_GENERIC, this.currentMode)
+        .dispatch(action, parameter)
         .then(() => {
           this.isLoaded = true
         })
