@@ -6,7 +6,7 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <template v-else>
-        <b-table striped responsive hover :items="getPoints" :fields="tableFields" v-if="hasPoints">
+        <b-table striped responsive hover :items="getPoints" :fields="tableFields" sort-by="date" :sort-desc="false" v-if="hasPoints">
 
         </b-table>
         <div v-else class="no-points">
@@ -24,6 +24,7 @@
 import { POINTS_LIST } from '@/store/actions/points'
 import { USER_REQUEST } from '@/store/actions/user'
 import { mapGetters } from 'vuex'
+import Moment from 'moment'
 
 export default {
   name: 'History',
@@ -42,9 +43,9 @@ export default {
       isLoaded: false,
       tableFields: [
         { key: 'text', sortable: true, label: 'Aktion' },
-        { key: 'value', sortable: true, label: 'Punkte' },
-        { key: 'date', sortable: true, label: 'Datum' },
-        { key: 'co2Saving', label: 'CO2 Ersparnisse' }
+        { key: 'points', sortable: true, label: 'Punkte', tdClass: 'text-center' },
+        { key: 'date', sortable: true, label: 'Datum', tdClass: 'text-right', formatter: (value, key, item) => new Moment(value).calendar(null, { sameElse: 'DDDD, DD. MMMM YYYY HH:mm' }) },
+        { key: 'co2Saving', label: 'CO2 Ersparnisse', tdClass: 'text-center' }
       ]
     }
   },
