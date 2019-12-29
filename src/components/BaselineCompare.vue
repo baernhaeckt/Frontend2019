@@ -4,7 +4,7 @@
     <div class="chart-outer-container">
       <GChart class="chart-container" type="ColumnChart"
             :settings="{packages: ['bar']}"
-            :data="userDataVsBaseLine"
+            :data="chartData"
             :options="chartOptions"
             :createChart="(el, google) => new google.charts.Bar(el)"
             @ready="onChartReady" />
@@ -46,65 +46,99 @@ export default {
       let personal = this.getPersonal()
 
       let data = baseLine.map(item => {
+        let sufficientTypeTitle = this.getTitleForSufficientType(item.type)
         let personalItemIndex = personal.findIndex(
-          pItem => pItem.title === item.title
+          pItem => pItem.type === item.type
         )
         let personalPoints =
-          personalItemIndex !== -1 ? personal[personalItemIndex].point || 0 : 0
+          personalItemIndex !== -1 ? personal[personalItemIndex].points || 0 : 0
         let personalSavings =
           personalItemIndex !== -1
-            ? personal[personalItemIndex].co2Saving || 0
+            ? personal[personalItemIndex].co2Savings || 0
             : 0
         return [
-          item.title,
-          item.baseLinePoint,
+          sufficientTypeTitle,
+          item.points,
           personalPoints,
-          item.baselineCo2Saving,
+          item.co2Savings,
           personalSavings
         ]
       })
 
+      return data
+    },
+    chartData () {
+      var haveCo2Data = this.chartDataHaveCo2Data
+      var data = haveCo2Data ? this.userDataVsBaseLine : this.userDataVsBaseLineWithoutCo2Column
+      var header = haveCo2Data ? [ 'Name', 'Ø Punkte', 'Deine Punkte', 'Ø CO2 Einsparung', 'Deine CO2 Einsparung' ] : [ 'Name', 'Ø Punkte', 'Deine Punkte' ]
       let result = [
-        [
-          'Name',
-          'Ø Punkte',
-          'Deine Punkte',
-          'Ø CO2 Einsparung',
-          'Deine CO2 Einsparung'
-        ],
+        header,
         ...data
       ]
+
+      console.log(result)
+
       return result
+    },
+    userDataVsBaseLineWithoutCo2Column () {
+      let userData = this.userDataVsBaseLine
+      let userDataWithoutCo2Column = userData.map(data => [data[0], data[1], data[2]])
+      console.log(userDataWithoutCo2Column)
+      return userDataWithoutCo2Column
+    },
+    chartDataHaveCo2Data () {
+      let userData = this.userDataVsBaseLine
+      return userData.some(val => val[3] > 0 || val[4] > 0)
     },
     chartOptions () {
       if (!this.chartsLib) {
         return null
       }
 
-      return this.chartsLib.charts.Bar.convertOptions({
-        chart: {
-          title: 'Durchschnitts-Vergleich',
-          subtitle:
-            'Deine Werte verglichen zum durchschnittlichen Schweizer Bürger.'
-        },
-        series: {
+      let chartSeries = {}
+      let chartAxesY = {}
+
+      // if we have CO2 data, plot full chart, otherwise only points chart
+      if (this.chartDataHaveCo2Data) {
+        chartSeries = {
           0: { axis: 'points' },
           1: { axis: 'points' },
           2: { axis: 'savings' },
           3: { axis: 'savings' }
-        },
-        axes: {
-          y: {
-            points: { label: 'Gesammelte Punkte', minValue: 0, maxValue: 1000 }, // Left y-axis.
-            savings: {
-              side: 'right',
-              label: 'CO2 Einsparung',
-              minValue: 0,
-              maxValue: 15
-            } // Right y-axis.
+        }
+        chartAxesY = {
+          points: {
+            label: 'Gesammelte Punkte'
+          }, // Left y-axis.
+          savings: {
+            side: 'right',
+            label: 'CO2 Einsparung'
+          } // Right y-axis.
+        }
+      } else {
+        chartSeries = {
+          0: { axis: 'points' },
+          1: { axis: 'points' }
+        }
+        chartAxesY = {
+          points: {
+            label: 'Gesammelte Punkte'
           }
         }
+      }
+
+      let chartOptions = this.chartsLib.charts.Bar.convertOptions({
+        chart: {
+          title: 'Durchschnitts-Vergleich',
+          subtitle: 'Deine Werte verglichen zum durchschnittlichen leaf Benutzer.'
+        },
+        series: chartSeries,
+        axes: {
+          y: chartAxesY
+        }
       })
+
+      return chartOptions
     }
   },
   watch: {},
@@ -112,6 +146,11 @@ export default {
     ...mapGetters(['getBaseline', 'getPersonal']),
     onChartReady (chart, google) {
       this.chartsLib = google
+    },
+    getTitleForSufficientType (sufficientType) {
+      switch (sufficientType) {
+        case 1: return 'Wissen'
+      }
     }
   },
   components: {}
