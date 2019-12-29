@@ -11,6 +11,9 @@
             :data="infoWindowData"
             :options="chartOptions" />
       </div>
+      <div v-show="showOwnInfoWindowContent" class="info-window-content" ref="ownInfoWindowContent">
+        Hier bist Du
+      </div>
     </div>
   </block-box>
 </template>
@@ -28,12 +31,12 @@ export default {
     this.isLoading = true
     try {
       this.google = await gmapsInit()
-      // const geocoder = new google.maps.Geocoder()
-
-      var mapOptions = {
+      let mapOptions = {
         zoom: 12,
-        center: { lat: 46.942097, lng: 7.438022 }, // Marzili
+        center: this.userCenter,
         disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: true,
         styles: [
           { elementType: 'geometry', stylers: [{ color: '#ebe3cd' }] },
           { elementType: 'labels.text.fill', stylers: [{ color: '#523735' }] },
@@ -191,6 +194,8 @@ export default {
       })
     }
 
+    this.createOwnMarker()
+
     this.$store.dispatch(FRIENDS_LIST).then(() => {
       var infoWindow = new this.google.maps.InfoWindow({
         content: null,
@@ -231,12 +236,18 @@ export default {
       map: undefined,
       isLoading: false,
       showInfoWindowContent: false,
+      showOwnInfoWindowContent: false,
+      ownInfoWindowCreated: false,
       infoWindowUser: null,
       google: undefined
     }
   },
   computed: {
-    ...mapGetters(['allFriends', 'getProfile']),
+    ...mapGetters(['allFriends', 'getProfile', 'isProfileLoaded']),
+    userCenter () {
+      let defaultCenter = { lat: 46.942097, lng: 7.438022 } // Marzili
+      return this.isProfileLoaded && this.getProfile.latitude > 0 && this.getProfile.longitude > 0 ? { lat: this.getProfile.latitude, lng: this.getProfile.longitude } : defaultCenter
+    },
     infoWindowData () {
       let friend = this.infoWindowUser
       let own = this.getProfile
@@ -271,6 +282,47 @@ export default {
       this.showInfoWindowContent = true
       infoWindow.setContent(this.$refs.infoWindowChartContent)
       infoWindow.open(map, marker)
+    },
+    openOwnInfoWindow (infoWindow, map, marker) {
+      this.showOwnInfoWindowContent = true
+      infoWindow.setContent(this.$refs.ownInfoWindowContent)
+      infoWindow.open(map, marker)
+    },
+    createOwnMarker () {
+      if (this.ownInfoWindowCreated || !this.isProfileLoaded) {
+        return
+      }
+
+      var center = this.userCenter
+      var infoWindow = new this.google.maps.InfoWindow({
+        content: null,
+        maxHeight: 250
+      })
+      var marker = new this.google.maps.Marker({
+        position: center,
+        icon: '/assets/own_leaf_marker.png',
+        map: this.map,
+        title: this.getProfile.displayName
+      })
+
+      var self = this
+
+      marker.addListener('click', function () {
+        self.openOwnInfoWindow(infoWindow, self.map, marker)
+      })
+      this.ownInfoWindowCreated = true
+    }
+  },
+  watch: {
+    isProfileLoaded (profileLoaded) {
+      if (profileLoaded) {
+        this.$nextTick(() => {
+          var center = this.userCenter
+          this.map.setCenter(center)
+
+          this.createOwnMarker()
+        })
+      }
     }
   }
 }
