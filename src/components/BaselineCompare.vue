@@ -76,14 +76,11 @@ export default {
         ...data
       ]
 
-      console.log(result)
-
       return result
     },
     userDataVsBaseLineWithoutCo2Column () {
       let userData = this.userDataVsBaseLine
       let userDataWithoutCo2Column = userData.map(data => [data[0], data[1], data[2]])
-      console.log(userDataWithoutCo2Column)
       return userDataWithoutCo2Column
     },
     chartDataHaveCo2Data () {
