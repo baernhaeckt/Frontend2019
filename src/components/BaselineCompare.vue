@@ -146,7 +146,7 @@ export default {
     },
     getTitleForSufficientType (sufficientType) {
       switch (sufficientType) {
-        case 1: return 'Wissen'
+        case 'Knowledge': return 'Wissen'
       }
     }
   },
