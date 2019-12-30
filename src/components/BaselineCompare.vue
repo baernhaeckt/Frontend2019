@@ -147,6 +147,12 @@ export default {
     getTitleForSufficientType (sufficientType) {
       switch (sufficientType) {
         case 'Knowledge': return 'Wissen'
+        case 'Energy': return 'Energie'
+        case 'Packing': return 'Verpackungen'
+        case 'FoodWaste': return 'Food-Waste'
+        case 'Share': return 'Teilen'
+        case 'Support': return 'Unterstützung'
+        default: return `Unbekannt (${sufficientType})`
       }
     }
   },

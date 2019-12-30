@@ -35,6 +35,7 @@ export default {
     return {
       isLoading: false,
       iconMap: {
+        Award: 'award',
         OnBoardingAward: 'door-open',
         TrashHeroAward: 'trash-alt'
       }
@@ -46,7 +47,8 @@ export default {
   watch: {},
   methods: {
     getIconForAwardKind (awardKind) {
-      return this.iconMap[awardKind]
+      let icon = this.iconMap[awardKind]
+      return icon !== undefined ? icon : 'award'
     }
   },
   components: {}
