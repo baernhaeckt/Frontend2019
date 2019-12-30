@@ -11,6 +11,7 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
+        <b-button to="/" class="mr-md-2 mb-md-0 mb-2"><font-awesome-icon :icon="['fas', 'home']" class="mr-2" /> Home</b-button>
         <!-- <b-button to="/statistics" class="mr-md-2 mb-md-0 mb-2"><font-awesome-icon :icon="['fas', 'chart-line']" /></b-button> -->
         <b-button to="/rankings" class="mr-md-2 mb-md-0 mb-2"><font-awesome-icon :icon="['fas', 'trophy']" class="mr-2" /> Rangliste</b-button>
         <b-button to="/history" class="mr-md-2 mb-md-0 mb-2"><font-awesome-icon :icon="['fas', 'landmark']" class="mr-2" /> Punkte</b-button>
