@@ -1,6 +1,6 @@
 <template>
   <block-box class="baseline-box">
-    <h3>Du im Vergleich zum Durchschnitts-Schweizer</h3>
+    <h3>Du im Vergleich zum Durchschnitt</h3>
     <div class="chart-outer-container">
       <GChart class="chart-container" type="ColumnChart"
             :settings="{packages: ['bar']}"
@@ -126,8 +126,6 @@ export default {
 
       let chartOptions = this.chartsLib.charts.Bar.convertOptions({
         chart: {
-          title: 'Durchschnitts-Vergleich',
-          subtitle: 'Deine Werte verglichen zum durchschnittlichen leaf Benutzer.'
         },
         series: chartSeries,
         axes: {
