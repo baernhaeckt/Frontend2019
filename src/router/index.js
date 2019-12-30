@@ -7,6 +7,7 @@ import Home from '@/views/home'
 import History from '@/views/history'
 import Rankings from '@/views/rankings'
 import Profile from '@/views/profile'
+import ChangePassword from '@/views/changepassword'
 import Token from '@/views/token'
 import Friends from '@/views/friends'
 // import Statistics from '@/views/statistics'
@@ -55,6 +56,12 @@ export default new Router({
           name: 'profile',
           beforeEnter: ifAuthenticated,
           component: Profile
+        },
+        {
+          path: '/changepassword',
+          name: 'changepassword',
+          beforeEnter: ifAuthenticated,
+          component: ChangePassword
         },
         {
           path: '/friends',

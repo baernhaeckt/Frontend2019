@@ -1,6 +1,7 @@
 import {
   USER_REQUEST,
   USER_UPDATE,
+  USER_PASSWORD_CHANGE,
   USER_ERROR,
   USER_SUCCESS
 } from '../actions/user'
@@ -46,10 +47,23 @@ const actions = {
           })
         })
         .catch(err => {
+          reject(err)
+        })
+    })
+  },
+  [USER_PASSWORD_CHANGE]: ({ commit, dispatch }, passwordChange) => {
+    return new Promise((resolve, reject) => {
+      apiCall({
+        url: ApiRoutes.user.passwordupdate,
+        data: { oldPassword: passwordChange.oldPassword, newPassword: passwordChange.newPassword },
+        method: 'patch',
+        dispatch: dispatch
+      })
+        .then(resp => {
+          resolve()
+        })
+        .catch(err => {
           commit(USER_ERROR)
-          if (err.unauthorized) {
-            dispatch(AUTH_LOGOUT)
-          }
           reject(err)
         })
     })

@@ -10,7 +10,8 @@ export const ApiRoutes = {
     login: ApiServer + 'api/users/Login',
     check: ApiServer + 'api/users/Register',
     me: ApiServer + 'api/profile',
-    update: ApiServer + 'api/profile'
+    update: ApiServer + 'api/profile',
+    passwordupdate: ApiServer + 'api/profile/password'
   },
   friends: {
     list: ApiServer + 'api/friends',

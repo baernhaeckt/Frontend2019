@@ -20,6 +20,7 @@
             <font-awesome-icon icon="user" class="mr-2" /> {{ userNameOrEmail }}
           </template>
           <b-dropdown-item to="profile"><font-awesome-icon icon="user-edit" class="mr-2" />Dein Profil</b-dropdown-item>
+          <b-dropdown-item to="changepassword"><font-awesome-icon :icon="['fas', 'key']" class="mr-2" />Passwort ändern</b-dropdown-item>
           <b-dropdown-item @click="logout" href="#"><font-awesome-icon icon="sign-out-alt" class="mr-2" />Logout</b-dropdown-item>
         </b-dropdown>
       </b-navbar-nav>
