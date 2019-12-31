@@ -37,7 +37,6 @@ const actions = {
       })
         .then(resp => {
           var result = handlePasswordRequired(resp)
-          console.log(result)
           if (!result.unauthorized) {
             localStorage.setItem('user-token', resp.token)
             // Here set the header of your ajax library to the token value.

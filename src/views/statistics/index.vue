@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     forecastImageUrl () {
-      console.log(settings)
       return settings.FORECAST_URL
     }
   },

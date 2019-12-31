@@ -68,11 +68,11 @@ export default {
   },
   methods: {
     updateValidation (errorFields) {
-      if (errorFields.oldPassword && errorFields.oldPassword.length > 0) {
-        this.errors.oldPassword = errorFields.oldPassword.join(', ')
+      if (errorFields.OldPassword && errorFields.OldPassword.length > 0) {
+        this.errors.oldPassword = errorFields.OldPassword.join(', ')
       }
-      if (errorFields.newPassword && errorFields.newPassword.length > 0) {
-        this.errors.newPassword = errorFields.newPassword.join(', ')
+      if (errorFields.NewPassword && errorFields.NewPassword.length > 0) {
+        this.errors.newPassword = errorFields.NewPassword.join(', ')
       }
       if (errorFields.newPasswordRepeat && errorFields.newPasswordRepeat.length > 0) {
         this.errors.newPasswordRepeat = errorFields.newPasswordRepeat.join(', ')
@@ -83,6 +83,10 @@ export default {
         this.updateValidation({ newPasswordRepeat: ['Die Passwortwiederholung stimmt nicht mit dem neuen Passwort überein.'] })
         return
       }
+
+      this.errors.oldPassword = null
+      this.errors.newPassword = null
+      this.errors.newPasswordRepeat = null
 
       this.loading = true
       this.$store.dispatch(USER_PASSWORD_CHANGE, { oldPassword: this.oldPassword, newPassword: this.newPassword }).then(() => {
