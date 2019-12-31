@@ -44,8 +44,8 @@ export default {
       tableFields: [
         { key: 'text', sortable: true, label: 'Aktion' },
         { key: 'points', sortable: true, label: 'Punkte', tdClass: 'text-center' },
-        { key: 'date', sortable: true, label: 'Datum', tdClass: 'text-right', formatter: (value, key, item) => new Moment(value).calendar(null, { sameElse: 'DDDD, DD. MMMM YYYY HH:mm' }) },
-        { key: 'co2Saving', label: 'CO2 Ersparnisse', tdClass: 'text-center' }
+        { key: 'co2Saving', label: 'CO2 Ersparnisse', tdClass: 'text-center' },
+        { key: 'date', sortable: true, label: 'Datum', tdClass: 'text-right', formatter: (value, key, item) => new Moment(value).calendar(null, { sameElse: 'DDDD, DD. MMMM YYYY HH:mm' }) }
       ]
     }
   },
