@@ -49,10 +49,10 @@ const getters = {
 
 const actions = {
   [RANKINGS_LIST_GLOBAL]: ({ commit, dispatch }) => {
-    dispatch([RANKINGS_LIST_GENERIC], 'global')
+    dispatch(RANKINGS_LIST_GENERIC, 'global')
   },
   [RANKINGS_LIST_FRIENDS]: ({ commit, dispatch }) => {
-    dispatch([RANKINGS_LIST_GENERIC], 'friends')
+    dispatch(RANKINGS_LIST_GENERIC, 'friends')
   },
   [RANKINGS_LIST_LOCAL]: ({ commit, dispatch }, zip) => {
     return new Promise((resolve, reject) => {
