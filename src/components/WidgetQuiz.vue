@@ -5,7 +5,7 @@
       <b-spinner class="large-spinner text-success" />
     </div>
     <p v-else-if="getQuestion.noMoreQuestions">
-      Es sind leider keine weiteren Fragen verfügbar.
+      Es sind leider keine weiteren Fragen verfügbar. Komm doch morgen nochmals vorbei.
     </p>
     <template v-else>
       <b-form @submit.prevent="checkAnswer">
