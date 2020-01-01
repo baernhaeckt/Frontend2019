@@ -6,32 +6,32 @@
         <b-spinner class="large-spinner text-success" />
       </div>
       <b-form @submit.prevent="storeProfile">
-        <b-form-group label="E-Mail Adresse (privat)">
+        <b-form-group label="E-Mail Adresse (nur sichtbar für Deine Freunde)">
           <b-input id="email" name="email" v-model="updatedProfile.email" placeholder="E-Mail" :state="validationState.email" readonly />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.email }}
           </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Nickname (sichtbar für alle Benutzer)">
-          <b-input id="displayname" name="nickname" v-model="updatedProfile.displayName" :state="validationState.nickname" placeholder="Nickname" />
+          <b-input id="displayname" name="nickname" v-model="updatedProfile.displayName" :state="validationState.nickname" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.nickname }}
           </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Strasse (nur sichtbar für Deine Freunde)">
-          <b-input id="street" name="street" v-model="updatedProfile.street" :state="validationState.street" placeholder="Strasse" />
+          <b-input id="street" name="street" v-model="updatedProfile.street" :state="validationState.street" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.street }}
           </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Postleitzahl (nur sichtbar für Deine Freunde)">
-        <b-input id="postalCode" name="postalCode" v-model="updatedProfile.postalCode" :state="validationState.postalCode" placeholder="Postleitzahl" />
+        <b-input id="postalCode" name="postalCode" v-model="updatedProfile.postalCode" :state="validationState.postalCode" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.postalCode }}
           </b-form-invalid-feedback>
           </b-form-group>
         <b-form-group label="Ort (nur sichtbar für Deine Freunde)">
-          <b-input id="city" name="city" v-model="updatedProfile.city" :state="validationState.city" placeholder="Ort" />
+          <b-input id="city" name="city" v-model="updatedProfile.city" :state="validationState.city" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.city }}
           </b-form-invalid-feedback>
