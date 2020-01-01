@@ -28,6 +28,7 @@ const startConnection = apiToken => {
     .withUrl(settings.API_SERVER + 'newsfeed', {
       accessTokenFactory: () => apiToken
     })
+    // .withAutomaticReconnect() // TODO: update SignalR package to newest BETA to enable auto-reconnect feature
     .configureLogging(LogLevel.Information)
     .build()
 
