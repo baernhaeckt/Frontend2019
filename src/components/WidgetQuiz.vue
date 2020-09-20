@@ -4,6 +4,10 @@
     <div v-if="!quizReady" class="loader text-center">
       <b-spinner class="large-spinner text-success" />
     </div>
+    <div v-else-if="isError" class="text-center">
+      <font-awesome-icon :icon="['far', 'frown-open']" class="h1 text-danger" />
+      <p>Es ist leider ein Fehler aufgetreten.</p>
+    </div>
     <p v-else-if="getQuestion.noMoreQuestions">
       Es sind leider keine weiteren Fragen verfügbar. Komm doch morgen nochmals vorbei.
     </p>
@@ -52,7 +56,8 @@ export default {
       isAnswerCheckLoading: false,
       answerChecked: false,
       answerCheckError: false,
-      selectedAnswer: ''
+      selectedAnswer: '',
+      isError: false
     }
   },
   computed: {
@@ -76,9 +81,15 @@ export default {
       this.answerChecked = false
       this.selectedAnswer = ''
       this.isLoading = true
+      this.isError = false
       this.$store.dispatch(QUIZ_GET_QUESTION).then(() => {
         this.isLoading = false
         this.initialized = true
+      }).catch(err => {
+        if (err) {}
+        this.isLoading = false
+        this.initialized = true
+        this.isError = true
       })
     },
     checkAnswer () {

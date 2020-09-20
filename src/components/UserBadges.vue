@@ -4,7 +4,7 @@
     <div v-if="isLoading" class="loader text-center">
       <b-spinner class="large-spinner text-success" />
     </div>
-    <ul class="list-unstyled" v-for="award in allAwards" v-bind:key="award.title" v-else-if="allAwards.length > 0">
+    <ul class="list-unstyled" v-for="award in awards" v-bind:key="award.key" v-else-if="awards.length > 0">
       <li>
         <font-awesome-icon :icon="getIconForAwardKind(award.kind)" class="mr-2 color-green" />
         {{award.title}}
@@ -42,7 +42,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allAwards'])
+    ...mapGetters(['allAwards']),
+    awards () {
+      return this.allAwards.map((award, index) => {
+        return {
+          ...award,
+          key: index
+        }
+      })
+    }
   },
   watch: {},
   methods: {
