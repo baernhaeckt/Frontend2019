@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyDTfN-s5DT0Aq5Ljjx1brkj6D4mHnbQ8S8'
+const API_KEY = 'AIzaSyDw9R1_gnDEQNcKPEnbIz758OfPWwCgb5Y'
 const CALLBACK_NAME = 'gmapsCallback'
 
 let initialized = !!window.google
