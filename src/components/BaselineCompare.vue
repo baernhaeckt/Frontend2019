@@ -42,17 +42,17 @@ export default {
       return this.baseLineLoaded && this.personalLoaded
     },
     userDataVsBaseLine () {
-      let baseLine = this.getBaseline()
-      let personal = this.getPersonal()
+      const baseLine = this.getBaseline()
+      const personal = this.getPersonal()
 
-      let data = baseLine.map(item => {
-        let sufficientTypeTitle = this.getTitleForSufficientType(item.type)
-        let personalItemIndex = personal.findIndex(
+      const data = baseLine.map(item => {
+        const sufficientTypeTitle = this.getTitleForSufficientType(item.type)
+        const personalItemIndex = personal.findIndex(
           pItem => pItem.type === item.type
         )
-        let personalPoints =
+        const personalPoints =
           personalItemIndex !== -1 ? personal[personalItemIndex].points || 0 : 0
-        let personalSavings =
+        const personalSavings =
           personalItemIndex !== -1
             ? personal[personalItemIndex].co2Savings || 0
             : 0
@@ -70,8 +70,8 @@ export default {
     chartData () {
       var haveCo2Data = this.chartDataHaveCo2Data
       var data = haveCo2Data ? this.userDataVsBaseLine : this.userDataVsBaseLineWithoutCo2Column
-      var header = haveCo2Data ? [ 'Name', 'Ø Punkte', 'Deine Punkte', 'Ø CO2 Einsparung', 'Deine CO2 Einsparung' ] : [ 'Name', 'Ø Punkte', 'Deine Punkte' ]
-      let result = [
+      var header = haveCo2Data ? ['Name', 'Ø Punkte', 'Deine Punkte', 'Ø CO2 Einsparung', 'Deine CO2 Einsparung'] : ['Name', 'Ø Punkte', 'Deine Punkte']
+      const result = [
         header,
         ...data
       ]
@@ -79,12 +79,12 @@ export default {
       return result
     },
     userDataVsBaseLineWithoutCo2Column () {
-      let userData = this.userDataVsBaseLine
-      let userDataWithoutCo2Column = userData.map(data => [data[0], data[1], data[2]])
+      const userData = this.userDataVsBaseLine
+      const userDataWithoutCo2Column = userData.map(data => [data[0], data[1], data[2]])
       return userDataWithoutCo2Column
     },
     chartDataHaveCo2Data () {
-      let userData = this.userDataVsBaseLine
+      const userData = this.userDataVsBaseLine
       return userData.some(val => val[3] > 0 || val[4] > 0)
     },
     chartOptions () {
@@ -124,7 +124,7 @@ export default {
         }
       }
 
-      let chartOptions = this.chartsLib.charts.Bar.convertOptions({
+      const chartOptions = this.chartsLib.charts.Bar.convertOptions({
         chart: {
         },
         series: chartSeries,

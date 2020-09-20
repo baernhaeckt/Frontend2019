@@ -45,7 +45,7 @@ export default {
   computed: {
     ...mapGetters(['getProfile']),
     userNameOrEmail () {
-      let profile = this.getProfile
+      const profile = this.getProfile
       return profile.displayName || profile.email
     }
   },

@@ -112,7 +112,7 @@ export default {
     },
     storeProfile () {
       this.loading = true
-      let profile = {
+      const profile = {
         displayName: this.updatedProfile.displayName,
         street: this.updatedProfile.street,
         postalCode: this.updatedProfile.postalCode,

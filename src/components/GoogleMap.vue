@@ -31,7 +31,7 @@ export default {
     this.isLoading = true
     try {
       this.google = await gmapsInit()
-      let mapOptions = {
+      const mapOptions = {
         zoom: 12,
         center: this.userCenter,
         disableDefaultUI: true,
@@ -224,9 +224,11 @@ export default {
       this.$nextTick(() => {
         var self = this
         window.addEventListener('resize', () => {
-          var currCenter = self.map.getCenter()
-          this.google.maps.event.trigger(self.map, 'resize')
-          self.map.setCenter(currCenter)
+          if (self.map !== undefined) {
+            var currCenter = self.map.getCenter()
+            this.google.maps.event.trigger(self.map, 'resize')
+            self.map.setCenter(currCenter)
+          }
         })
       })
     })
@@ -245,12 +247,12 @@ export default {
   computed: {
     ...mapGetters(['allFriends', 'getProfile', 'isProfileLoaded']),
     userCenter () {
-      let defaultCenter = { lat: 46.942097, lng: 7.438022 } // Marzili
+      const defaultCenter = { lat: 46.942097, lng: 7.438022 } // Marzili
       return this.isProfileLoaded && this.getProfile.latitude > 0 && this.getProfile.longitude > 0 ? { lat: this.getProfile.latitude, lng: this.getProfile.longitude } : defaultCenter
     },
     infoWindowData () {
-      let friend = this.infoWindowUser
-      let own = this.getProfile
+      const friend = this.infoWindowUser
+      const own = this.getProfile
 
       if (friend === null || own === null) {
         return []
@@ -263,7 +265,7 @@ export default {
       ]
     },
     chartOptions () {
-      let friend = this.infoWindowUser
+      const friend = this.infoWindowUser
       if (friend === null) {
         return {}
       }
@@ -318,7 +320,9 @@ export default {
       if (profileLoaded) {
         this.$nextTick(() => {
           var center = this.userCenter
-          this.map.setCenter(center)
+          if (self.map !== undefined) {
+            this.map.setCenter(center)
+          }
 
           this.createOwnMarker()
         })

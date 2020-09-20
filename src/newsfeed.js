@@ -8,7 +8,7 @@ import { settings } from '@/settings'
 let connection = null
 
 function refreshDataForEvent (event) {
-  let vueStore = window.vueInstance.$store
+  const vueStore = window.vueInstance.$store
   switch (event.title) {
     case 'Neue Punkte':
     case 'Punkte erhalten':

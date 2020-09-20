@@ -85,7 +85,7 @@ export default {
       this.isAnswerCheckLoading = true
       this.answerChecked = false
       this.answerCheckError = false
-      let answer = {
+      const answer = {
         questionId: this.getQuestion.questionId,
         answerID: this.selectedAnswer
       }

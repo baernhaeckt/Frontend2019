@@ -17,11 +17,11 @@ const actions = {
   },
   [TOKEN_PROCESS]: ({ commit, dispatch }) => {
     return new Promise((resolve, reject) => {
-      let promises = []
-      let maxRetries = state.unprocessedTokens.length + 1
+      const promises = []
+      const maxRetries = state.unprocessedTokens.length + 1
       let retries = 0
       while (state.unprocessedTokens.length > 0 && retries < maxRetries) {
-        let token = state.unprocessedTokens[0]
+        const token = state.unprocessedTokens[0]
         commit('TOKEN_REMOVE', token)
         commit('TOKEN_UPDATELOCALSTORAGE')
         promises.push(
@@ -50,10 +50,10 @@ const mutations = {
   [TOKEN_STORE]: (state, newToken) => {
     state.unprocessedTokens.push(newToken)
   },
-  'TOKEN_REMOVE': (state, token) => {
+  TOKEN_REMOVE: (state, token) => {
     state.unprocessedTokens.splice(state.unprocessedTokens.indexOf(token), 1)
   },
-  'TOKEN_UPDATELOCALSTORAGE': state => {
+  TOKEN_UPDATELOCALSTORAGE: state => {
     localStorage.setItem(
       'unprocessedTokens',
       JSON.stringify(state.unprocessedTokens)

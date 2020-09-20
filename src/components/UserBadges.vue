@@ -47,7 +47,7 @@ export default {
   watch: {},
   methods: {
     getIconForAwardKind (awardKind) {
-      let icon = this.iconMap[awardKind]
+      const icon = this.iconMap[awardKind]
       return icon !== undefined ? icon : 'award'
     }
   },

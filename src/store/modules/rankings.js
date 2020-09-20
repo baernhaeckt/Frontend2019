@@ -56,9 +56,9 @@ const actions = {
   },
   [RANKINGS_LIST_LOCAL]: ({ commit, dispatch }, zip) => {
     return new Promise((resolve, reject) => {
-      let axioParams = new URLSearchParams()
+      const axioParams = new URLSearchParams()
       axioParams.append('zip', zip)
-      apiCall({ url: ApiRoutes.rankings['list_local'], method: 'get', params: axioParams, dispatch: dispatch })
+      apiCall({ url: ApiRoutes.rankings.list_local, method: 'get', params: axioParams, dispatch: dispatch })
         .then(resp => {
           commit(RANKINGS_LIST_GENERIC, ['local', resp])
           resolve(resp)

@@ -46,7 +46,7 @@ export const ApiRoutes = {
 }
 
 const urlReplace = (url, urlData) => {
-  for (let prop in urlData) {
+  for (const prop in urlData) {
     url = url.replace(`{${prop}}`, urlData[prop])
   }
   return url
@@ -54,9 +54,9 @@ const urlReplace = (url, urlData) => {
 
 export const apiCall = ({ url, method, urlData, dispatch, ...args }) =>
   new Promise((resolve, reject) => {
-    let token = localStorage.getItem('user-token') || ''
+    const token = localStorage.getItem('user-token') || ''
 
-    if (token) { axios.defaults.headers.common['Authorization'] = 'Bearer ' + token }
+    if (token) { axios.defaults.headers.common.Authorization = 'Bearer ' + token }
 
     try {
       if (urlData) {
@@ -72,7 +72,7 @@ export const apiCall = ({ url, method, urlData, dispatch, ...args }) =>
           resolve(resp.data)
         })
         .catch(error => {
-          let result = handleError(error)
+          const result = handleError(error)
           if (result.unauthorized && dispatch) {
             dispatch(AUTH_LOGOUT)
           }

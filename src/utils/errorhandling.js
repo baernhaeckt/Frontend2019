@@ -1,5 +1,5 @@
 export const handleError = err => {
-  let error = {
+  const error = {
     unauthorized: false,
     error: err,
     message: undefined,
@@ -14,7 +14,7 @@ export const handleError = err => {
     error.message = 'Zugriff verweigert, Benutzername oder Passwort falsch.'
   }
   if (err.response && err.response.data && err.response.data.title) {
-    let errors = err.response.data.errors
+    const errors = err.response.data.errors
     error.message = err.response.data.title
     if (errors) {
       error.message += Object.keys(errors).map(key => errors[key].join(', '))
@@ -31,7 +31,7 @@ export const handleError = err => {
 }
 
 export const handlePasswordRequired = resp => {
-  let error = {
+  const error = {
     unauthorized: false,
     error: {},
     response: resp,

@@ -31,7 +31,7 @@ const actions = {
       commit(AUTH_REQUEST)
       apiCall({
         url: ApiRoutes.user.check,
-        data: { 'email': email },
+        data: { email: email },
         method: 'post',
         dispatch: dispatch
       })
@@ -41,7 +41,7 @@ const actions = {
             localStorage.setItem('user-token', resp.token)
             // Here set the header of your ajax library to the token value.
             // example with axios
-            axios.defaults.headers.common['Authorization'] = resp.token
+            axios.defaults.headers.common.Authorization = resp.token
             commit(AUTH_SUCCESS, resp)
             dispatch(USER_REQUEST)
             resolve(result)

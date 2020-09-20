@@ -26,10 +26,10 @@ import WidgetQuiz from './../../../components/WidgetQuiz'
 export default {
   name: 'App',
   mounted () {
-    let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
+    const toggler = this.$refs.navigationBar.$el.getElementsByClassName(
       'navbar-toggler'
     )
-    let visibility =
+    const visibility =
       toggler !== undefined
         ? window.getComputedStyle(toggler[0], null).getPropertyValue('display')
         : 'none'
@@ -52,10 +52,10 @@ export default {
   methods: {},
   watch: {
     $route (to, from) {
-      let toggler = this.$refs.navigationBar.$el.getElementsByClassName(
+      const toggler = this.$refs.navigationBar.$el.getElementsByClassName(
         'navbar-toggler'
       )
-      let visibility =
+      const visibility =
         toggler !== undefined
           ? window
             .getComputedStyle(toggler[0], null)
