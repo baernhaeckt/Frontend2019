@@ -7,19 +7,19 @@
       </div>
       <b-form @submit.prevent="storeNewPassword">
         <b-form-group label="Altes Passwort">
-          <b-input type="password" id="oldPassword" name="oldPassword" v-model="oldPassword" :state="validationState.oldPassword" />
+          <b-input type="password" id="oldPassword" name="oldPassword" autocomplete="current-password" v-model="oldPassword" :state="validationState.oldPassword" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.oldPassword }}
           </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Neues Passwort">
-          <b-input type="password" id="newPassword" name="newPassword" v-model="newPassword" :state="validationState.newPassword" />
+          <b-input type="password" id="newPassword" name="newPassword" autocomplete="new-password" v-model="newPassword" :state="validationState.newPassword" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.newPassword }}
           </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Neues Passwort wiederholen">
-          <b-input type="password" id="newPasswordRepeat" name="newPasswordRepeat" v-model="newPasswordRepeat" :state="validationState.newPasswordRepeat" />
+          <b-input type="password" id="newPasswordRepeat" name="newPasswordRepeat" autocomplete="new-password" v-model="newPasswordRepeat" :state="validationState.newPasswordRepeat" />
           <b-form-invalid-feedback id="input-live-feedback">
             {{ errors.newPasswordRepeat }}
           </b-form-invalid-feedback>
